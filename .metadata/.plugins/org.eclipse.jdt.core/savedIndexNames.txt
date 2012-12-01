@@ -1,0 +1,5 @@
+INDEX VERSION 1.126+C:\Users\Christian\Documents\GitHub\IMT3671-Mobile-Project\.metadata\.plugins\org.eclipse.jdt.core
+22561991.index
+1706378483.index
+3881697785.index
+3689755714.index
