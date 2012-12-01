@@ -13,7 +13,7 @@
 	<string name="high_score">High Scores</string>
 	<string name="credits">Credits</string>
 	<string name="quit_game">Quit Game</string>
-	<string name="imageDescription">This is an image</string>
+	<string name="imageDescription">Image here...</string>
 	
 	<!-- Activity - How To Play -->
     <string name="howToPlayGame1">Tilt your phone in the direction you want to move.</string>
