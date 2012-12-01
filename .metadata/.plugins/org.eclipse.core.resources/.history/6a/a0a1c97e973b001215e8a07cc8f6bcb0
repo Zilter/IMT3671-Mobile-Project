@@ -1,0 +1,20 @@
+package com.example.gemswapper;
+
+import android.app.Activity;
+import android.graphics.Typeface;
+import android.view.WindowManager.LayoutParams;
+
+public class CreditsActivity extends Activity {
+	
+	public static Typeface typeface;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState)
+	{
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(0xFFFFFFFF, LayoutParams.FLAG_FULLSCREEN | LayoutParams.FLAG_KEEP_SCREEN_ON);
+		
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_credits);
+	}
+}

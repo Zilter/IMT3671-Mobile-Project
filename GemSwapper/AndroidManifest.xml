@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.gemswapper"
+    package="com.project.gemswapper"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -20,5 +21,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name=".CreditsActivity"
+            android:label="@string/title_activity_credits" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.project.gemswapper.MainActivity" />
+        </activity>
+        
+        <activity
+            android:name=".HighscoreActivity"
+            android:label="@string/title_activity_highscore" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.project.gemswapper.MainActivity" />
+        </activity>
     </application>
+
 </manifest>

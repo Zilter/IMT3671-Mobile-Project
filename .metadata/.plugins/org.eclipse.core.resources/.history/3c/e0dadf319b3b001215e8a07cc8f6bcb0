@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GemSwapper</string>
+    <string name="menu_settings">Settings</string>
+
+    <!-- activities -->
+    <string name="title_activity_main">MainActivity</string>
+
+    <!-- Main Menu & Menu Buttons -->
+    <string name="start_game">Start Game</string>
+    <string name="how_to_play">How to Play</string>
+    <string name="achievements">Achievements</string>
+    <string name="high_score">High Scores</string>
+    <string name="credits">Credits</string>
+    <string name="quit_game">Quit Game</string>
+    <string name="imageDescription">This is an image</string>
+
+    <!-- Activity - How To Play -->
+    <string name="howToPlayGame1">Tilt your phone in the direction you want to move.</string>
+    <string name="howToPlayGame2">The goal of the game is to survive for as long as you can without hitting the edge of your screen.</string>
+    <string name="howToImage1">Tilt</string>
+
+    <!-- Activity - Credits -->
+    <string name="creditsMain">Credits</string>
+    <string name="creators">This game was created by Christian Stokkebekk, Christian Holt and
+        Øyvind Nordli for an assignment in Mobile Systems Programming at Gjøvik University College (GUC)</string>
+
+    <!-- Activity - High Score -->
+    <string name="highScoreMain">High Score</string>
+    <string name="name">Name:\t</string>
+    <string name="highscore">Score:\t</string>
+    <string name="loading">Please wait, loading data</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_highscore">HighscoreActivity</string>
+
+</resources>
