@@ -1,0 +1,23 @@
+package com.project.gemswapper;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+
+public class Game extends Activity {
+	
+	private GameView mGameView;
+	
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_game, menu);
+        return true;
+    }
+}

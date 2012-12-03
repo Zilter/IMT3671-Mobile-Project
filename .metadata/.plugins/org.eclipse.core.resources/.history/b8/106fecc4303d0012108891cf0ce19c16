@@ -1,0 +1,28 @@
+package com.project.gemswapper;
+
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.view.View;
+
+public class GameView extends View {
+
+	Paint paint;
+	Resources res;
+	
+	public GameView(Context context) {
+		super(context);
+		paint = new Paint();
+	}
+
+	
+	@Override
+	protected void onDraw(Canvas canvas)
+	{
+		// Fill screen white
+		paint.setStyle(Paint.Style.FILL);
+		paint.setColor(Color.WHITE);
+		canvas.drawPaint(paint);
+	}
+}

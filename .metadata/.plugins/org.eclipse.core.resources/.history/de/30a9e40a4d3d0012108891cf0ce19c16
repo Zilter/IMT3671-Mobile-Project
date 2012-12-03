@@ -1,0 +1,46 @@
+package com.project.gemswapper;
+
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.view.View;
+
+public class GameView extends View {
+
+	Paint paint;
+	Resources res;
+	Bitmap grid;
+	Context mContext;
+	Tile tiles[];
+	
+	Tile testTile;
+	
+	public GameView(Context context) {
+		super(context);
+		paint = new Paint();
+		
+		mContext = context;
+		res = this.getResources();
+		grid = BitmapFactory.decodeResource(res,  R.drawable.grid_01);
+		
+		testTile = new Tile(context, 200, 200, 0);
+		
+	}
+
+	
+	@Override
+	protected void onDraw(Canvas canvas)
+	{
+		// Fill screen white
+		paint.setStyle(Paint.Style.FILL);
+		paint.setColor(Color.WHITE);
+		canvas.drawPaint(paint);
+		
+		//canvas.drawBitmap(grid, 0, 0, paint);
+		testTile.draw(canvas);
+	}
+}

@@ -1,0 +1,90 @@
+package com.project.gemswapper;
+
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.view.View;
+
+public class Tile{
+	int mType;
+	Bitmap mSprite;
+	Resources res;
+	
+	private int xPos;
+	private int yPos;
+	private int spriteHeight;
+	private int spriteWidth;
+	
+	private Rect mRect;
+	
+	public enum TileType {CIRCLE, TRIANGLE, SQUARE, DIAMOND, STAR };
+	
+	
+	public Tile()
+	{
+		res = this.getResources();
+		mRect = new Rect(0, 0, 0, 0);
+		xPos = 0;
+		yPos = 0;
+		spriteHeight = 0;
+		spriteWidth = 0;
+		mType = 0;
+		mSprite = null;
+	}
+	
+	public Tile(int type)		// 5 types..
+	{
+		boolean goOn = true;
+		res = this.getResources();
+		
+		if(type == TileType.CIRCLE.ordinal())
+		{
+			mSprite = BitmapFactory.decodeResource(res, R.drawable.circle_tile_01);
+		}
+		else if(type == TileType.TRIANGLE.ordinal())
+		{
+			mSprite = BitmapFactory.decodeResource(res, R.drawable.triangle_tile_01);
+		}
+		else if(type == TileType.SQUARE.ordinal())
+		{
+			mSprite = BitmapFactory.decodeResource(res, R.drawable.square_tile_01);
+		}
+		else if(type == TileType.DIAMOND.ordinal())
+		{
+			mSprite = BitmapFactory.decodeResource(res, R.drawable.diamond_tile_01);
+		}
+		else if(type == TileType.STAR.ordinal())
+		{
+			mSprite = BitmapFactory.decodeResource(res, R.drawable.star_tile_01);
+		}
+		else
+		{
+			System.out.println("Wrong tileType specified...");
+			goOn = false;
+		}
+		
+		if(goOn)
+		{
+			
+		}
+	}
+	
+	public int getXPos()
+	{
+		return xPos;
+	}
+	
+	public int getYPos()
+	{
+		return yPos;
+	}
+	
+	public void draw(Canvas canvas)
+	{
+		Rect dest = new Rect(getXPos(), getYPos(), getXPos() + spriteWidth, getYPos() + spriteHeight);
+		
+		canvas.drawBitmap(mSprite, mRect, dest, null);
+	}
+}

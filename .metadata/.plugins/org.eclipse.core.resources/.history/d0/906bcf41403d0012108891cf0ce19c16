@@ -1,0 +1,17 @@
+package com.project.gemswapper;
+
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+
+public class Tile {
+	byte mType;
+	Bitmap mSprite;
+	
+	private Rect mSize;
+	
+	
+	public void draw(Canvas canvas)
+	{
+		
+	}
+}

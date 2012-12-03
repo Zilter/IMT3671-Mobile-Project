@@ -1,0 +1,35 @@
+package com.project.gemswapper;
+
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+
+public class Tile {
+	byte mType;
+	Bitmap mSprite;
+	
+	private int xPos;
+	private int yPos;
+	private int spriteHeight;
+	private int spriteWidth;
+	
+	private Rect mRect;
+	
+	
+	public Tile()
+	{
+		mRect = new Rect(0, 0, 0, 0);
+		xPos = 80;
+		yPos = 200;
+		
+	}
+	
+	
+	
+	public void draw(Canvas canvas)
+	{
+		Rect dest = new Rect(getXPos(), getYPos(), getXPos + spriteWidth, getYPos() + spirteHeight);
+		
+		canvas.drawBitmap(mSprite, mRect, dest, null);
+	}
+}

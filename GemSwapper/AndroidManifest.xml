@@ -21,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name=".CreditsActivity"
             android:label="@string/title_activity_credits" >
@@ -29,10 +28,30 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.project.gemswapper.MainActivity" />
         </activity>
-        
         <activity
             android:name=".HighscoreActivity"
             android:label="@string/title_activity_highscore" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.project.gemswapper.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Game"
+            android:label="@string/title_activity_game" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.project.gemswapper.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Achievements"
+            android:label="@string/title_activity_achievements" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.project.gemswapper.MainActivity" />
+        </activity>
+        <activity
+            android:name=".HowToActivity"
+            android:label="@string/title_activity_how_to" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.project.gemswapper.MainActivity" />

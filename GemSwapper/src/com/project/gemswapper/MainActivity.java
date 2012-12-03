@@ -59,21 +59,21 @@ public class MainActivity extends Activity implements OnClickListener {
     {
     	switch(v.getId())
     	{
-//    	case R.id.start_game:
-//    		Intent startGameIntent = new Intent(this, ....);
-//    		startActivity(startGameIntent);
-//    		break;
-//    		
-//    	case R.id.how_to:
-//    		Intent howToIntent = new Intent(this, .....);
-//    		startActivity(howToIntent);
-//    		break;
-//    		
-//    	case R.id.achievements:
-//    		Intent achievementIntent = new Intent(this, ....);
-//    		startActivity(achievementIntent);
-//    		break;
-//    		
+    	case R.id.start_game:
+    		Intent startGameIntent = new Intent(this, Game.class);
+    		startActivity(startGameIntent);
+    		break;
+    		
+    	case R.id.how_to:
+    		Intent howToIntent = new Intent(this, HowToActivity.class);
+    		startActivity(howToIntent);
+    		break;
+    		
+    	case R.id.achievements:
+    		Intent achievementIntent = new Intent(this, Achievements.class);
+    		startActivity(achievementIntent);
+    		break;
+    		
     	case R.id.high_score:
     		Intent highScoreIntent = new Intent(this, HighscoreActivity.class);
     		startActivity(highScoreIntent);
