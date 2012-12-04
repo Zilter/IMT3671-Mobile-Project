@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.DisplayMetrics;
 import android.view.View;
 
 public class GameView extends View {
@@ -24,8 +25,8 @@ public class GameView extends View {
 	
 	float mScale;
 	
-	int mViewWidth;
-	int mViewHeight;
+	float mViewWidth;
+	float mViewHeight;
 	
 	public GameView(Context context) {
 		super(context);
@@ -36,6 +37,14 @@ public class GameView extends View {
 		res = this.getResources();
 		grid = BitmapFactory.decodeResource(res,  R.drawable.grid_01);
 		randomGen = new Random();
+		
+		//get width and height of screen for scaling
+		DisplayMetrics metrics = this.getResources().getDisplayMetrics();
+		float mViewWidth = metrics.widthPixels;
+		float mViewHeight = metrics.heightPixels;
+		mScale = mViewWidth / 720;
+		
+		System.out.println(mViewWidth);
 		
 		fillGrid();
 	}
@@ -49,7 +58,6 @@ public class GameView extends View {
 		{
 			for(int x = 0; x < GRIDSIZE; ++x)
 			{
-				
 				do
 				{
 					goodType = true;
@@ -72,24 +80,10 @@ public class GameView extends View {
 					}
 					
 				}while(!goodType);
-				
 				tiles[y][x] = new Tile(mContext, x * 90, y * 90, typeTemp);
 			}
 		}
 	}
-	
-	@Override
-	 protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld){
-	     super.onSizeChanged(xNew, yNew, xOld, yOld);
-
-	     mViewWidth = xNew;
-	     mViewHeight = yNew;
-	     
-	     mScale = mViewWidth / 720;
-	}
-	
-	
-	
 	
 	private boolean checkMatch(int x, int y, int type)
 	{
@@ -136,12 +130,12 @@ public class GameView extends View {
 		paint.setStyle(Paint.Style.FILL);
 		paint.setColor(Color.WHITE);
 		canvas.drawPaint(paint);
-	
+		
+		canvas.scale(mScale, mScale);	
+		
 		canvas.drawBitmap(grid, 0, 0, paint);
 		
-		canvas.scale(mScale, mScale);
-		
-	
+
 		
 		for(int i = 0; i < GRIDSIZE; ++i)
 		{
