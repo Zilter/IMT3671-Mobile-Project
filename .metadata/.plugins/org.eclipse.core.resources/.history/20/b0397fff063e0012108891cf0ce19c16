@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    
+<!--     <ImageView -->
+<!--         android:id="@+id/main_menu" -->
+<!--         android:contentDescription="@string/imageDescription" -->
+<!--         android:src="@drawable/ic_launcher.png" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_alignParentRight="true" -->
+<!--         android:layout_centerVertical="true" -->
+<!--         android:layout_marginRight="25dp"  -->
+<!--     /> -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+        
+     	<ImageButton 
+     	    android:contentDescription="@string/imageDescription"
+     	    android:id="@+id/start_game_button"
+     	    android:layout_height="wrap_content"
+     	    android:layout_width="wrap_content"
+     	    android:src="@drawable/start_game_01"
+     	    />
+        
+        <TextView
+            android:id="@+id/start_game"
+            style="@style/MenuFont"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/start_game" />
+        
+        <TextView
+            android:id="@+id/how_to"
+            style="@style/MenuFont"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/how_to_play" />
+        
+        <TextView
+            android:id="@+id/achievements"
+            style="@style/MenuFont"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/achievements" />
+        
+        <TextView
+            android:id="@+id/high_score"
+            style="@style/MenuFont"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/high_score" />
+        
+        <TextView
+            android:id="@+id/credits"
+            style="@style/MenuFont"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/credits" />
+        
+        <TextView
+            android:id="@+id/quit_game"
+            style="@style/MenuFont"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/quit_game" />
+        
+        
+    </LinearLayout>
+
+</RelativeLayout>

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -25,66 +26,51 @@ public class MainActivity extends Activity implements OnClickListener {
         
         typeface = Typeface.createFromAsset(getAssets(), "IMPACT.TTF");
         
-        TextView startGame = (TextView) findViewById(R.id.start_game);
-        TextView howToPlay = (TextView) findViewById(R.id.how_to);
-        TextView achievements = (TextView) findViewById(R.id.achievements);
-        TextView highScore = (TextView) findViewById(R.id.high_score);
-        TextView credits = (TextView) findViewById(R.id.credits);
-        TextView quitGame = (TextView) findViewById(R.id.quit_game);
+        ImageButton startGameButton = (ImageButton) findViewById(R.id.start_game_button);
+        ImageButton howToPlayButton = (ImageButton) findViewById(R.id.howToPlay_button);
+        ImageButton achievementsButton = (ImageButton) findViewById(R.id.achievements_button);
+        ImageButton highScoreButton = (ImageButton) findViewById(R.id.high_score_button);
+        ImageButton creditsButton = (ImageButton) findViewById(R.id.credits_button);
+        ImageButton quitButton = (ImageButton) findViewById(R.id.quit_game_button);
         
-        startGame.setTypeface(typeface);
-        howToPlay.setTypeface(typeface);
-        achievements.setTypeface(typeface);
-        highScore.setTypeface(typeface);
-        credits.setTypeface(typeface);
-        quitGame.setTypeface(typeface);
-        
-        startGame.setOnTouchListener(new TouchListener());
-        howToPlay.setOnTouchListener(new TouchListener());
-        achievements.setOnTouchListener(new TouchListener());
-        highScore.setOnTouchListener(new TouchListener());
-        credits.setOnTouchListener(new TouchListener());
-        quitGame.setOnTouchListener(new TouchListener());
-        
-        
-        startGame.setOnClickListener(this);
-        howToPlay.setOnClickListener(this);
-        achievements.setOnClickListener(this);
-        highScore.setOnClickListener(this);
-        credits.setOnClickListener(this);
-        quitGame.setOnClickListener(this);
+        startGameButton.setOnClickListener(this);
+        howToPlayButton.setOnClickListener(this);
+        achievementsButton.setOnClickListener(this);
+        highScoreButton.setOnClickListener(this);
+        creditsButton.setOnClickListener(this);
+        quitButton.setOnClickListener(this);
     }
     
     public void onClick(View v)
     {
     	switch(v.getId())
     	{
-    	case R.id.start_game:
+    	case R.id.start_game_button:
     		Intent startGameIntent = new Intent(this, Game.class);
     		startActivity(startGameIntent);
     		break;
     		
-    	case R.id.how_to:
+    	case R.id.howToPlay_button:
     		Intent howToIntent = new Intent(this, HowToActivity.class);
     		startActivity(howToIntent);
     		break;
     		
-    	case R.id.achievements:
+    	case R.id.achievements_button:
     		Intent achievementIntent = new Intent(this, Achievements.class);
     		startActivity(achievementIntent);
     		break;
     		
-    	case R.id.high_score:
+    	case R.id.high_score_button:
     		Intent highScoreIntent = new Intent(this, HighscoreActivity.class);
     		startActivity(highScoreIntent);
     		break;
     		
-    	case R.id.credits:
+    	case R.id.credits_button:
     		Intent creditsIntent = new Intent(this, CreditsActivity.class);
     		startActivity(creditsIntent);
     		break;
     		
-    	case R.id.quit_game:
+    	case R.id.quit_game_button:
     		finish();
     		break;
     	}

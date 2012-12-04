@@ -32,14 +32,21 @@ public class GameView extends View {
 		grid = BitmapFactory.decodeResource(res,  R.drawable.grid_01);
 		randomGen = new Random();
 		
+		fillGrid();
+	}
+	
+	private void fillGrid()
+	{
+		int typeTemp;
+		
 		for(int i = 0; i < GRIDSIZE; ++i)
 		{
 			for(int j = 0; j < GRIDSIZE; ++j)
 			{
-				tiles[i][j] = new Tile(context, i * 100, j * 100, randomGen.nextInt(5));
+				typeTemp = randomGen.nextInt(5);
+				tiles[i][j] = new Tile(mContext, i * 90, j * 90, typeTemp);
 			}
 		}
-		
 	}
 
 	
@@ -60,6 +67,5 @@ public class GameView extends View {
 				tiles[i][j].draw(canvas);
 			}
 		}
-		
 	}
 }
