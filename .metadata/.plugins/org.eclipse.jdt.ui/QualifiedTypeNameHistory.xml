@@ -2,5 +2,10 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="com.example.gemswapper.R.id"/>
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="android.graphics.Paint.Style"/>
 <fullyQualifiedTypeName name="android.view.WindowManager.LayoutParams"/>
+<fullyQualifiedTypeName name="android.graphics.BitmapFactory"/>
+<fullyQualifiedTypeName name="com.project.gemswapper.R.drawable"/>
+<fullyQualifiedTypeName name="com.project.gemswapper.Tile.TileType"/>
+<fullyQualifiedTypeName name="com.project.gemswapper.R.id"/>
 </qualifiedTypeNameHistroy>

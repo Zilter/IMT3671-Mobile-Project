@@ -1,5 +1,0 @@
-package com.project.gemswapper;
-
-public class GameView extends View {
-
-}

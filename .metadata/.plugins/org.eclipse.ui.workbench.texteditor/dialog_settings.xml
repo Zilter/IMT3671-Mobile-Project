@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="&#x09;if(y &gt; 0 &amp;&amp; y &lt; GRIDSIZE - 1) // Check both above and below. " key="selection"/>
+		<list key="findhistory">
+			<item value="&#x09;if(y &gt; 0 &amp;&amp; y &lt; GRIDSIZE - 1) // Check both above and below. "/>
+			<item value="//    &#x09;case R.id.start_game:"/>
+		</list>
+	</section>
+</section>
