@@ -19,12 +19,13 @@ public final class R {
         public static final int high_score_01=0x7f020005;
         public static final int how_to_play_01=0x7f020006;
         public static final int ic_action_search=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int quit_game_01=0x7f020009;
-        public static final int square_tile_01=0x7f02000a;
-        public static final int star_tile_01=0x7f02000b;
-        public static final int start_game_01=0x7f02000c;
-        public static final int triangle_tile_01=0x7f02000d;
+        public static final int ic_launcer=0x7f020008;
+        public static final int ic_launcher=0x7f020009;
+        public static final int quit_game_01=0x7f02000a;
+        public static final int square_tile_01=0x7f02000b;
+        public static final int star_tile_01=0x7f02000c;
+        public static final int start_game_01=0x7f02000d;
+        public static final int triangle_tile_01=0x7f02000e;
     }
     public static final class id {
         public static final int achievements_button=0x7f070004;
