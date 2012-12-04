@@ -77,9 +77,6 @@ public class Tile{
 			yPos = y;
 			
 			mRect = new Rect(0, 0, spriteWidth, spriteHeight);
-			
-			System.out.print("Type: ");
-			System.out.println(mType);
 		}
 		else		// make sure we don't access a broken object...
 		{
@@ -91,6 +88,11 @@ public class Tile{
 			mType = 0;
 			mSprite = null;
 		}
+	}
+	
+	public int getType()
+	{
+		return mType;
 	}
 	
 	public int getXPos()

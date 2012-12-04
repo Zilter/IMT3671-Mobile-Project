@@ -22,6 +22,11 @@ public class GameView extends View {
 	Tile tiles[][];
 	Random randomGen;
 	
+	float mScale;
+	
+	int mViewWidth;
+	int mViewHeight;
+	
 	public GameView(Context context) {
 		super(context);
 		paint = new Paint();
@@ -38,18 +43,92 @@ public class GameView extends View {
 	private void fillGrid()
 	{
 		int typeTemp;
+		boolean goodType = true;
 		
-		for(int i = 0; i < GRIDSIZE; ++i)
+		for(int y = 0; y < GRIDSIZE; ++y)
 		{
-			for(int j = 0; j < GRIDSIZE; ++j)
+			for(int x = 0; x < GRIDSIZE; ++x)
 			{
-				typeTemp = randomGen.nextInt(5);
-				tiles[i][j] = new Tile(mContext, i * 90, j * 90, typeTemp);
+				
+				do
+				{
+					goodType = true;
+					typeTemp = randomGen.nextInt(5);
+					
+					if(x >= 2)
+					{
+						if(tiles[y][x - 1].getType() == typeTemp && tiles[y][x - 2].getType() == typeTemp)
+						{
+							goodType = false;
+						}
+					}
+					
+					if(y >= 2)
+					{
+						if(tiles[y - 1][x].getType() == typeTemp && tiles[y - 2][x].getType() == typeTemp)
+						{
+							goodType = false;
+						}
+					}
+					
+				}while(!goodType);
+				
+				tiles[y][x] = new Tile(mContext, x * 90, y * 90, typeTemp);
 			}
 		}
 	}
-
 	
+	@Override
+	 protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld){
+	     super.onSizeChanged(xNew, yNew, xOld, yOld);
+
+	     mViewWidth = xNew;
+	     mViewHeight = yNew;
+	     
+	     mScale = mViewWidth / 720;
+	}
+	
+	
+	
+	
+	private boolean checkMatch(int x, int y, int type)
+	{
+		if(x >= 2)	// Check to the left for 3 in a row. 
+		{
+			if(tiles[x - 1][y].getType() == type && tiles[x - 2][y].getType() == type)
+			{
+				return true;
+			}
+		}
+		
+		if(x <= GRIDSIZE - 3) // Check to the right for 3 in a row.
+		{
+			if(tiles[x + 1][y].getType() == type && tiles[x + 2][y].getType() == type)
+			{
+				return true;
+			}
+		}
+		
+		if(y >= 2) // Check above.
+		{
+			if(tiles[x][y - 1].getType() == type && tiles[x][y - 2].getType() == type)
+			{
+				return true;
+			}
+		}
+		
+		if(y <= GRIDSIZE - 3)	// Check below.
+		{
+			if(tiles[x][y + 1].getType() == type && tiles[x][y + 2].getType() == type)
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+
 	@Override
 	protected void onDraw(Canvas canvas)
 	{
@@ -57,8 +136,12 @@ public class GameView extends View {
 		paint.setStyle(Paint.Style.FILL);
 		paint.setColor(Color.WHITE);
 		canvas.drawPaint(paint);
-		
+	
 		canvas.drawBitmap(grid, 0, 0, paint);
+		
+		canvas.scale(mScale, mScale);
+		
+	
 		
 		for(int i = 0; i < GRIDSIZE; ++i)
 		{
