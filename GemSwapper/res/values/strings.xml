@@ -19,9 +19,15 @@
     <string name="imageDescription">This is an image</string>
 
     <!-- Activity - How To Play -->
-    <string name="howToPlayGame1">Tilt your phone in the direction you want to move.</string>
-    <string name="howToPlayGame2">The goal of the game is to survive for as long as you can without hitting the edge of your screen.</string>
-    <string name="howToImage1">Tilt</string>
+    <string name="howToPlayGame1">Score points by combining three or more of the same shape in a straight line</string>
+    <string name="howToPlayGame2">Drag a shape towards a neighbouring shape to swap their places</string>
+    <string name="howToPlayGame3">The goal of the game is to score as many points as you can before the time runs out.</string>
+    <string name="howToImage1">Three in a row</string>
+    <string name="howToImage2">Four in a row</string>
+    <string name="howToImage3">Five in a row</string>
+    <string name="howToImage4">A corner shape</string>
+    <string name="howToImage5">A T-shape</string>
+    <string name="imageInfo">An image describing how to play the game</string>
 
     <!-- Activity - Credits -->
     <string name="creditsMain">Credits</string>

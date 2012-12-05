@@ -15,31 +15,49 @@ public final class R {
         public static final int circle_tile_01=0x7f020001;
         public static final int credits_01=0x7f020002;
         public static final int diamond_tile_01=0x7f020003;
-        public static final int grid_01=0x7f020004;
-        public static final int high_score_01=0x7f020005;
-        public static final int how_to_play_01=0x7f020006;
-        public static final int ic_action_search=0x7f020007;
-        public static final int ic_launcer=0x7f020008;
-        public static final int ic_launcher=0x7f020009;
-        public static final int quit_game_01=0x7f02000a;
-        public static final int square_tile_01=0x7f02000b;
-        public static final int star_tile_01=0x7f02000c;
-        public static final int start_game_01=0x7f02000d;
-        public static final int triangle_tile_01=0x7f02000e;
+        public static final int five_in_a_row=0x7f020004;
+        public static final int four_in_a_row=0x7f020005;
+        public static final int grid_01=0x7f020006;
+        public static final int high_score_01=0x7f020007;
+        public static final int how_to_play_01=0x7f020008;
+        public static final int ic_action_search=0x7f020009;
+        public static final int ic_launcer=0x7f02000a;
+        public static final int ic_launcher=0x7f02000b;
+        public static final int quit_game_01=0x7f02000c;
+        public static final int square_tile_01=0x7f02000d;
+        public static final int star_tile_01=0x7f02000e;
+        public static final int start_game_01=0x7f02000f;
+        public static final int three_and_three_corner=0x7f020010;
+        public static final int three_and_three_t=0x7f020011;
+        public static final int three_in_a_row=0x7f020012;
+        public static final int triangle_tile_01=0x7f020013;
     }
     public static final class id {
-        public static final int achievements_button=0x7f070007;
+        public static final int achievements_button=0x7f070014;
         public static final int creators=0x7f070001;
         public static final int creditsMain=0x7f070000;
-        public static final int credits_button=0x7f070009;
-        public static final int high_score_button=0x7f070008;
-        public static final int howToPlay_button=0x7f070006;
-        public static final int menu_settings=0x7f07000b;
+        public static final int credits_button=0x7f070016;
+        public static final int high_score_button=0x7f070015;
+        public static final int howToImage1=0x7f070008;
+        public static final int howToImage2=0x7f07000a;
+        public static final int howToImage3=0x7f07000c;
+        public static final int howToImage4=0x7f07000e;
+        public static final int howToImage5=0x7f070010;
+        public static final int howToImageText1=0x7f070009;
+        public static final int howToImageText2=0x7f07000b;
+        public static final int howToImageText3=0x7f07000d;
+        public static final int howToImageText4=0x7f07000f;
+        public static final int howToImageText5=0x7f070011;
+        public static final int howToPlay_button=0x7f070013;
+        public static final int howToText1=0x7f070005;
+        public static final int howToText2=0x7f070006;
+        public static final int howToText3=0x7f070007;
+        public static final int menu_settings=0x7f070018;
         public static final int name=0x7f070003;
         public static final int placement=0x7f070002;
-        public static final int quit_game_button=0x7f07000a;
+        public static final int quit_game_button=0x7f070017;
         public static final int score=0x7f070004;
-        public static final int start_game_button=0x7f070005;
+        public static final int start_game_button=0x7f070012;
     }
     public static final class layout {
         public static final int activity_achievements=0x7f030000;
@@ -60,36 +78,42 @@ public final class R {
     public static final class string {
         public static final int achievements=0x7f040007;
         public static final int app_name=0x7f040000;
-        public static final int creators=0x7f040010;
+        public static final int creators=0x7f040016;
         public static final int credits=0x7f040009;
         /**  Activity - Credits 
          */
-        public static final int creditsMain=0x7f04000f;
-        public static final int hello_world=0x7f040015;
+        public static final int creditsMain=0x7f040015;
+        public static final int hello_world=0x7f04001b;
         /**  Activity - High Score 
          */
-        public static final int highScoreMain=0x7f040011;
+        public static final int highScoreMain=0x7f040017;
         public static final int high_score=0x7f040008;
-        public static final int highscore=0x7f040013;
-        public static final int howToImage1=0x7f04000e;
+        public static final int highscore=0x7f040019;
+        public static final int howToImage1=0x7f04000f;
+        public static final int howToImage2=0x7f040010;
+        public static final int howToImage3=0x7f040011;
+        public static final int howToImage4=0x7f040012;
+        public static final int howToImage5=0x7f040013;
         /**  Activity - How To Play 
          */
         public static final int howToPlayGame1=0x7f04000c;
         public static final int howToPlayGame2=0x7f04000d;
+        public static final int howToPlayGame3=0x7f04000e;
         public static final int how_to_play=0x7f040006;
         public static final int imageDescription=0x7f04000b;
-        public static final int loading=0x7f040014;
+        public static final int imageInfo=0x7f040014;
+        public static final int loading=0x7f04001a;
         public static final int menu_settings=0x7f040001;
-        public static final int name=0x7f040012;
+        public static final int name=0x7f040018;
         public static final int quit_game=0x7f04000a;
         /**  Main Menu & Menu Buttons 
          */
         public static final int start_game=0x7f040005;
-        public static final int title_activity_achievements=0x7f040017;
+        public static final int title_activity_achievements=0x7f04001d;
         public static final int title_activity_credits=0x7f040004;
-        public static final int title_activity_game=0x7f040016;
+        public static final int title_activity_game=0x7f04001c;
         public static final int title_activity_highscore=0x7f040003;
-        public static final int title_activity_how_to=0x7f040018;
+        public static final int title_activity_how_to=0x7f04001e;
         /**  activities 
          */
         public static final int title_activity_main=0x7f040002;
