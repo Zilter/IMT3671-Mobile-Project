@@ -81,7 +81,8 @@ public class GameView extends View {
 					}
 					
 				}while(!goodType);
-				tiles[y][x] = new Tile(mContext, x * 90, y * 90, typeTemp);
+				float tileScale = ( 90 - ( mScale * 90 ) ) / 2;
+				tiles[y][x] = new Tile(mContext, x * 90 + (int)tileScale , y * 90 + (int)tileScale, typeTemp);
 			}
 		}
 	}
