@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.view.View;
 
 public class GameView extends View {
@@ -122,7 +123,67 @@ public class GameView extends View {
 		return false;
 	}
 
-
+	@Override
+	public boolean onTouchEvent(MotionEvent event)
+	{
+		int action = event.getAction();
+		
+		int startX;
+		int startY;
+		int endX;
+		int endY;
+		
+		
+		if(action == MotionEvent.ACTION_DOWN)
+		{
+			Tile temp;
+			int x = (int) event.getX();
+			int y = (int) event.getY();
+			
+			for(int i = 0; i < GRIDSIZE; ++i)
+			{
+				for(int j = 0; j < GRIDSIZE; j++)
+				{
+					temp = tiles[i][j];
+					if(x >= temp.getXPos() && x < (temp.getXPos() + temp.getWidth()) &&
+					   y >= temp.getYPos() && y < (temp.getYPos() + temp.getHeight()))
+					{
+						startX = x;
+						startY = y;
+						
+						System.out.print("I touched tile: ");
+						System.out.print(i);
+						System.out.print(", ");
+						System.out.println(j);
+					}
+				}
+			}
+		}
+		else if(action == MotionEvent.ACTION_MOVE)
+		{
+			System.out.print(event.getX());
+			System.out.print(", ");
+			System.out.println(event.getY());
+			
+			for(int i = 0; i < GRIDSIZE; ++i)
+			{
+				for(int j = 0; j < GRIDSIZE; ++j)
+				{
+					
+				}
+			}
+			
+			this.invalidate();		// Force redraw. 
+		}
+		else if(action == MotionEvent.ACTION_UP)
+		{
+			// ...
+		}
+		
+		
+		return true;
+	}
+	
 	@Override
 	protected void onDraw(Canvas canvas)
 	{
@@ -134,8 +195,6 @@ public class GameView extends View {
 		canvas.scale(mScale, mScale);	
 		
 		canvas.drawBitmap(grid, 0, 0, paint);
-		
-
 		
 		for(int i = 0; i < GRIDSIZE; ++i)
 		{

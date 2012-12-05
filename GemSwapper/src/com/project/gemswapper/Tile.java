@@ -115,6 +115,16 @@ public class Tile{
 		yPos = y - (spriteHeight / 2);
 	}
 	
+	public int getWidth()
+	{
+		return spriteWidth;
+	}
+	
+	public int getHeight()
+	{
+		return spriteHeight;
+	}
+	
 	
 	public void draw(Canvas canvas)
 	{
