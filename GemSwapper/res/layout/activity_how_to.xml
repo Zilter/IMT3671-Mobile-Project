@@ -1,14 +1,132 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world"
-        tools:context=".HowToActivity" />
+        android:orientation="vertical" >
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/howToText1"
+            android:textSize="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/howToPlayGame1" />
+
+        <TextView
+            android:id="@+id/howToText2"
+            android:textSize="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/howToText1"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/howToPlayGame2" />
+
+        <TextView
+            android:id="@+id/howToText3"
+            android:textSize="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/howToText2"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/howToPlayGame3" />
+
+        <ImageView
+            android:id="@+id/howToImage1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/howToText3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:contentDescription="@string/imageInfo"
+            android:src="@drawable/three_in_a_row" />
+
+        <TextView
+            android:id="@+id/howToImageText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/howToImage1"
+            android:layout_centerHorizontal="true"
+            android:text="@string/howToImage1" />
+
+        <ImageView
+            android:id="@+id/howToImage2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/howToImageText1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:contentDescription="@string/imageInfo"
+            android:src="@drawable/four_in_a_row" />
+
+        <TextView
+            android:id="@+id/howToImageText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/howToImage2"
+            android:layout_centerHorizontal="true"
+            android:text="@string/howToImage2" />
+
+        <ImageView
+            android:id="@+id/howToImage3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/howToImageText2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:contentDescription="@string/imageInfo"
+            android:src="@drawable/five_in_a_row" />
+
+        <TextView
+            android:id="@+id/howToImageText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/howToImage3"
+            android:layout_centerHorizontal="true"
+            android:text="@string/howToImage3" />
+
+        <ImageView
+            android:id="@+id/howToImage4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/howToImageText3"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="20dp"
+            android:contentDescription="@string/imageInfo"
+            android:src="@drawable/three_and_three_corner" />
+
+        <TextView
+            android:id="@+id/howToImageText4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/howToImage4"
+            android:text="@string/howToImage4" />
+
+        <ImageView
+            android:id="@+id/howToImage5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/howToImageText3"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="20dp"
+            android:contentDescription="@string/imageInfo"
+            android:src="@drawable/three_and_three_t" />
+
+        <TextView
+            android:id="@+id/howToImageText5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/howToImage5"
+            android:text="@string/howToImage5" />
+        
+    </RelativeLayout>
+</ScrollView>
