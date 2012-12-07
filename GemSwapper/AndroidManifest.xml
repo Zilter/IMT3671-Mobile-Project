@@ -17,7 +17,9 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,35 +28,45 @@
         </activity>
         <activity
             android:name=".CreditsActivity"
-            android:label="@string/title_activity_credits" >
+            android:label="@string/title_activity_credits"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.project.gemswapper.MainActivity" />
         </activity>
         <activity
             android:name=".HighscoreActivity"
-            android:label="@string/title_activity_highscore" >
+            android:label="@string/title_activity_highscore"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.project.gemswapper.MainActivity" />
         </activity>
         <activity
             android:name=".Game"
-            android:label="@string/title_activity_game" >
+            android:label="@string/title_activity_game"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"  >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.project.gemswapper.MainActivity" />
         </activity>
         <activity
             android:name=".Achievements"
-            android:label="@string/title_activity_achievements" >
+            android:label="@string/title_activity_achievements"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"  >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.project.gemswapper.MainActivity" />
         </activity>
         <activity
             android:name=".HowToActivity"
-            android:label="@string/title_activity_how_to" >
+            android:label="@string/title_activity_how_to"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"  >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.project.gemswapper.MainActivity" />
