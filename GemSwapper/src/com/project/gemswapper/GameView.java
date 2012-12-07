@@ -39,6 +39,8 @@ public class GameView extends View {
 	int endX;
 	int endY;
 	
+	int patterns[][];
+	
 	boolean dragStarted;
 	
 	SoundPool sounds;
@@ -49,7 +51,9 @@ public class GameView extends View {
 		super(context);
 		paint = new Paint();
 		tiles = new Tile[8][8];
+		patterns = new int[35][];
 		
+		fillPatterns();
 		mContext = context;
 		res = this.getResources();
 		grid = BitmapFactory.decodeResource(res,  R.drawable.grid_01);
@@ -78,6 +82,36 @@ public class GameView extends View {
 		
 		
 		fillGrid();
+	}
+	
+	// Patterns are defined as [Above, Above, Left, Left, CENTER, Right, Right, Down, Down, SUMNEEDED, SCORE] with 1's and 0's 
+	// corresponding to the pattern we want to match. e.g [1, 1, 0, 0, 1, 0, 0, 0, 0, 3, 100] for 3 in a row starting from the center node
+	// and going up, giving a score of 100. 
+	
+	// Patterns should be added in descending order of SUM needed. 
+	private void fillPatterns()
+	{
+		// Five-T shapes.
+		patterns[0] = new int[] {1, 1, 1, 1, 1, 1, 1, 0, 0, 7, 1000}; // Left, right, up
+		patterns[1] = new int[] {0, 0, 1, 1, 1, 1, 1, 1, 1, 7, 1000}; // left, right, down
+		patterns[2] = new int[] {1, 1, 1, 1, 1, 0, 0, 1, 1, 7, 1000}; // up, down, left
+		patterns[3] = new int[] {1, 1, 0, 0, 1, 1, 1, 1, 1, 7, 1000}; // up, down, right.
+		
+		// Four-T Shapes
+		patterns[4] = new int[] {};
+		
+		// Five in a row.
+		patterns[5] = new int[] {1, 1, 0, 0, 1, 0, 0, 1, 1, 5, 800}; // up and down
+		patterns[6] = new int[] {0, 0, 1, 1, 1, 1, 1, 0, 0, 5, 800}; // left and right
+		
+		System.out.println(patterns[0][0]);
+		
+		
+		// Four in a row
+		
+		// Three-T shapes
+		
+		// Three in a row
 	}
 	
 	private void fillGrid()
@@ -265,66 +299,13 @@ public class GameView extends View {
 	
 	private boolean checkMatch(int x, int y, int type)
 	{
-		boolean right, rightRight, left, leftLeft, up, upUp, down, downDown;
-		right = rightRight = left = leftLeft = up = upUp = down = downDown = false;
+		int typeMatch[] = new int[9];
 		
-		if(x < GRIDSIZE - 1 && tiles[y][x + 1].getType() == type)	// Check right
-		{
-			right = true;
-			
-			if(x < GRIDSIZE - 2 && tiles[y][x + 2].getType() == type)	// Check 2 to the right
-			{
-				rightRight = true;
-			}
-		}
 		
-		if(x > 0 && tiles[y][x - 1].getType() == type) // Check left
-		{
-			left = true;
-			
-			if(x > 1 && tiles[y][x - 2].getType() == type) // Check 2 to the left
-			{
-				leftLeft = true;
-			}
-		}
 		
-		if(y < GRIDSIZE - 1 && tiles[y + 1][x].getType() == type) // Check below. 
-		{
-			down = true;
-			
-			if(y < GRIDSIZE - 2 && tiles[y + 2][x].getType() == type) // Check 2 below. 
-			{
-				downDown = true;
-			}
-		}
-		
-		if(y > 0 && tiles[y - 1][x].getType() == type)
-		{
-			up = true;
-			
-			if(y > 1 && tiles[y - 2][x].getType() == type)
-			{
-				upUp = true;
-			}
-		}
-		
-		if(right || rightRight || left || leftLeft || down || downDown || up || upUp)
-		{
-			return findShape(right, rightRight, left, leftLeft, down, downDown, up, upUp);
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
-	private boolean findShape(boolean right, boolean rightRight, boolean left,
-			boolean leftLeft, boolean down, boolean downDown, boolean up,
-			boolean upUp) 
-	{
 		return false;
 	}
-
+	
 	private void playSound(int type)
 	{
 		sounds.play(type, 1.0f, 1.0f, 0, 0, 1.0f);
