@@ -9,6 +9,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
@@ -39,6 +41,10 @@ public class GameView extends View {
 	
 	boolean dragStarted;
 	
+	SoundPool sounds;
+	int sFailure;
+	int sSuccess;
+	
 	public GameView(Context context) {
 		super(context);
 		paint = new Paint();
@@ -65,6 +71,11 @@ public class GameView extends View {
 		startY = -1;
 		endX = -1;
 		endY = -1;
+		
+		sounds = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+		sFailure = sounds.load(mContext, R.raw.failure, 1);
+		sSuccess = sounds.load(mContext, R.raw.success, 1);
+		
 		
 		fillGrid();
 	}
@@ -177,13 +188,57 @@ public class GameView extends View {
 			System.out.println(endY);
 			
 			if(startX != endX || startY != endY)
-			{
-				System.out.println("I should try to move now...");
+			{	
+				if(endX > startX)	// drag right.
+				{
+					if(checkMatch(startY, startX + 1, tiles[startY][startX + 1].getType()))
+					{
+						playSound(sSuccess);
+					}
+					else
+					{
+						playSound(sFailure);
+					}
+				}
+				else if(endX < startX) // drag left
+				{
+					if(checkMatch(startY, startX - 1, tiles[startY][startX - 1].getType()))
+					{
+						playSound(sSuccess);
+					}
+					else
+					{
+						playSound(sFailure);
+					}
+				}
+				else if(endY > startY) // drag down.
+				{
+					if(checkMatch(startY + 1, startX, tiles[startY + 1][startX].getType()))
+					{
+						playSound(sSuccess);
+					}
+					else
+					{
+						playSound(sFailure);	
+					}
+				}
+				else if(endY < startY) // drag up
+				{
+					if(checkMatch(startY - 1, startX, tiles[startY - 1][startX].getType()))
+					{
+						playSound(sSuccess);
+					}
+					else
+					{
+						playSound(sFailure);
+					}
+				}
+				
+				//switch, clear and reward points. 
 			}
 			
 			this.invalidate();		// Force redraw. 
 		}
-		
 		return true;
 	}
 	
@@ -210,38 +265,68 @@ public class GameView extends View {
 	
 	private boolean checkMatch(int x, int y, int type)
 	{
-		if(x >= 2)	// Check to the left for 3 in a row. 
+		boolean right, rightRight, left, leftLeft, up, upUp, down, downDown;
+		right = rightRight = left = leftLeft = up = upUp = down = downDown = false;
+		
+		if(x < GRIDSIZE - 1 && tiles[y][x + 1].getType() == type)	// Check right
 		{
-			if(tiles[x - 1][y].getType() == type && tiles[x - 2][y].getType() == type)
+			right = true;
+			
+			if(x < GRIDSIZE - 2 && tiles[y][x + 2].getType() == type)	// Check 2 to the right
 			{
-				return true;
+				rightRight = true;
 			}
 		}
 		
-		if(x <= GRIDSIZE - 3) // Check to the right for 3 in a row.
+		if(x > 0 && tiles[y][x - 1].getType() == type) // Check left
 		{
-			if(tiles[x + 1][y].getType() == type && tiles[x + 2][y].getType() == type)
+			left = true;
+			
+			if(x > 1 && tiles[y][x - 2].getType() == type) // Check 2 to the left
 			{
-				return true;
+				leftLeft = true;
 			}
 		}
 		
-		if(y >= 2) // Check above.
+		if(y < GRIDSIZE - 1 && tiles[y + 1][x].getType() == type) // Check below. 
 		{
-			if(tiles[x][y - 1].getType() == type && tiles[x][y - 2].getType() == type)
+			down = true;
+			
+			if(y < GRIDSIZE - 2 && tiles[y + 2][x].getType() == type) // Check 2 below. 
 			{
-				return true;
+				downDown = true;
 			}
 		}
 		
-		if(y <= GRIDSIZE - 3)	// Check below.
+		if(y > 0 && tiles[y - 1][x].getType() == type)
 		{
-			if(tiles[x][y + 1].getType() == type && tiles[x][y + 2].getType() == type)
+			up = true;
+			
+			if(y > 1 && tiles[y - 2][x].getType() == type)
 			{
-				return true;
+				upUp = true;
 			}
 		}
 		
+		if(right || rightRight || left || leftLeft || down || downDown || up || upUp)
+		{
+			return findShape(right, rightRight, left, leftLeft, down, downDown, up, upUp);
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	private boolean findShape(boolean right, boolean rightRight, boolean left,
+			boolean leftLeft, boolean down, boolean downDown, boolean up,
+			boolean upUp) 
+	{
 		return false;
+	}
+
+	private void playSound(int type)
+	{
+		sounds.play(type, 1.0f, 1.0f, 0, 0, 1.0f);
 	}
 }
