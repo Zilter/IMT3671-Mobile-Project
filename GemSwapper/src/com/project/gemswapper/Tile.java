@@ -34,6 +34,20 @@ public class Tile{
 		mSprite = null;
 	}
 	
+	public Tile(Tile t)
+	{
+		mType = t.mType;
+		mSprite = t.mSprite;
+		res = t.res;
+		
+		xPos = t.xPos;
+		yPos = t.yPos;
+		spriteHeight = t.spriteHeight;
+		spriteWidth = t.spriteWidth;
+		
+		mRect = t.mRect;
+	}
+	
 	public Tile(Context context, int x, int y, int type)		// 5 types..
 	{
 		res = context.getResources();
