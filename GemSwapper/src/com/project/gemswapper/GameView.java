@@ -24,6 +24,7 @@ public class GameView extends View {
 	Paint paint;
 	Resources res;
 	Bitmap grid;
+	Bitmap background;
 	Context mContext;
 	Tile tiles[][];
 	Random randomGen;
@@ -43,6 +44,15 @@ public class GameView extends View {
 	int endY;
 	
 	int patterns[][];
+	int patternTypes[][];
+	
+	private final int FIVE_T_SCORE = 1000;
+	private final int FOUR_T_SCORE = 800;
+	private final int FIVE_ROW_SCORE = 700;
+	private final int THREE_T_SCORE  = 600;
+	private final int CORNER_SCORE = 500;
+	private final int FOUR_ROW_SCORE = 400;
+	private final int THREE_ROW_SCORE = 300;
 	
 	boolean dragStarted;
 	
@@ -55,11 +65,14 @@ public class GameView extends View {
 		paint = new Paint();
 		tiles = new Tile[8][8];
 		patterns = new int[NUM_PATTERNS][];
+		patternTypes = new int[7][2];		// [i][0] = The counter for how many of this type solved this round.
+											// [i][1] = The score given for the pattern type. 
 		
 		fillPatterns();
 		mContext = context;
 		res = this.getResources();
 		grid = BitmapFactory.decodeResource(res,  R.drawable.grid_01);
+		background = BitmapFactory.decodeResource(res, R.drawable.background);
 		randomGen = new Random();
 		
 		//get width and height of screen for scaling
@@ -89,66 +102,79 @@ public class GameView extends View {
 		fillGrid();
 	}
 	
-	// Patterns are defined as [Above, Above, Left, Left, CENTER, Right, Right, Down, Down, SUMNEEDED, SCORE] with 1's and 0's 
-	// corresponding to the pattern we want to match. e.g [1, 1, 0, 0, 1, 0, 0, 0, 0, 3, 100] for 3 in a row starting from the center node
-	// and going up, giving a score of 100. 
+	// Patterns are defined as [Above, Above, Left, Left, CENTER, Right, Right, Down, Down, SUMNEEDED, PATTERNTYPE] with 1's and 0's 
+	// corresponding to the pattern we want to match. e.g [1, 1, 0, 0, 1, 0, 0, 0, 0, 3, TYPE_THREE_ROW] for 3 in a row starting from the center node
+	// and going up, with a type of TYPE_THREE_ROW. 
 	
 	// Patterns should be added in descending order of SUM needed. 
 	private void fillPatterns()
-	{
-		final int FIVE_T_SCORE = 1000;
-		final int FOUR_T_SCORE = 800;
-		final int FIVE_ROW_SCORE = 700;
-		final int THREE_T_SCORE  = 600;
-		final int CORNER_SCORE = 500;
-		final int FOUR_ROW_SCORE = 400;
-		final int THREE_ROW_SCORE = 300;
+	{	
+		final int TYPE_FIVE_T = 0;
+		final int TYPE_FOUR_T = 1;
+		final int TYPE_FIVE_ROW = 2;
+		final int TYPE_THREE_T = 3;
+		final int TYPE_CORNER = 4;
+		final int TYPE_FOUR_ROW = 5;
+		final int TYPE_THREE_ROW = 6;
 		
 		// Five-T shapes.
-		patterns[0] = new int[] {1, 1, 1, 1, 1, 1, 1, 0, 0, 7, FIVE_T_SCORE}; // Left, right, up
-		patterns[1] = new int[] {0, 0, 1, 1, 1, 1, 1, 1, 1, 7, FIVE_T_SCORE}; // left, right, down
-		patterns[2] = new int[] {1, 1, 1, 1, 1, 0, 0, 1, 1, 7, FIVE_T_SCORE}; // up, down, left
-		patterns[3] = new int[] {1, 1, 0, 0, 1, 1, 1, 1, 1, 7, FIVE_T_SCORE}; // up, down, right.
+		patterns[0] = new int[] {1, 1, 1, 1, 1, 1, 1, 0, 0, 7, TYPE_FIVE_T}; // Left, right, up
+		patterns[1] = new int[] {0, 0, 1, 1, 1, 1, 1, 1, 1, 7, TYPE_FIVE_T}; // left, right, down
+		patterns[2] = new int[] {1, 1, 1, 1, 1, 0, 0, 1, 1, 7, TYPE_FIVE_T}; // up, down, left
+		patterns[3] = new int[] {1, 1, 0, 0, 1, 1, 1, 1, 1, 7, TYPE_FIVE_T}; // up, down, right.
 		
 		// Four-T Shapes
-		patterns[4]  = new int[] {1, 1, 0, 1, 1, 1, 1, 0, 0, 6, FOUR_T_SCORE}; // up, 1 left, 2 right. 
-		patterns[5]  = new int[] {1, 1, 1, 1, 1, 1, 0, 0, 0, 6, FOUR_T_SCORE}; // up, 2 left, 1 right. 
-		patterns[6]  = new int[] {0, 0, 0, 1, 1, 1, 1, 1, 1, 6, FOUR_T_SCORE}; // down, 1 left, 2 right.
-		patterns[7]  = new int[] {0, 0, 1, 1, 1, 1, 0, 1, 1, 6, FOUR_T_SCORE}; // down, 2 left, 1 right.
-		patterns[8]  = new int[] {0, 1, 1, 1, 1, 0, 0, 1, 1, 6, FOUR_T_SCORE}; // 1 up, 2 left, 2 down.
-		patterns[9]  = new int[] {1, 1, 1, 1, 1, 0, 0, 1, 0, 6, FOUR_T_SCORE}; // 2 up, 2 left, 1 down. 
-		patterns[10] = new int[] {0, 1, 0, 0, 1, 1, 1, 1, 1, 6, FOUR_T_SCORE}; // 1 up, 2 right, 2 down. 
-		patterns[11] = new int[] {1, 1, 0, 0, 1, 1, 1, 1, 0, 6, FOUR_T_SCORE}; // 2 up, 2 right, 1 down. 
+		patterns[4]  = new int[] {1, 1, 0, 1, 1, 1, 1, 0, 0, 6, TYPE_FOUR_T}; // up, 1 left, 2 right. 
+		patterns[5]  = new int[] {1, 1, 1, 1, 1, 1, 0, 0, 0, 6, TYPE_FOUR_T}; // up, 2 left, 1 right. 
+		patterns[6]  = new int[] {0, 0, 0, 1, 1, 1, 1, 1, 1, 6, TYPE_FOUR_T}; // down, 1 left, 2 right.
+		patterns[7]  = new int[] {0, 0, 1, 1, 1, 1, 0, 1, 1, 6, TYPE_FOUR_T}; // down, 2 left, 1 right.
+		patterns[8]  = new int[] {0, 1, 1, 1, 1, 0, 0, 1, 1, 6, TYPE_FOUR_T}; // 1 up, 2 left, 2 down.
+		patterns[9]  = new int[] {1, 1, 1, 1, 1, 0, 0, 1, 0, 6, TYPE_FOUR_T}; // 2 up, 2 left, 1 down. 
+		patterns[10] = new int[] {0, 1, 0, 0, 1, 1, 1, 1, 1, 6, TYPE_FOUR_T}; // 1 up, 2 right, 2 down. 
+		patterns[11] = new int[] {1, 1, 0, 0, 1, 1, 1, 1, 0, 6, TYPE_FOUR_T}; // 2 up, 2 right, 1 down. 
 		
 		// Five in a row.
-		patterns[12] = new int[] {1, 1, 0, 0, 1, 0, 0, 1, 1, 5, FIVE_ROW_SCORE}; // up and down
-		patterns[13] = new int[] {0, 0, 1, 1, 1, 1, 1, 0, 0, 5, FIVE_ROW_SCORE}; // left and right
+		patterns[12] = new int[] {1, 1, 0, 0, 1, 0, 0, 1, 1, 5, TYPE_FIVE_ROW}; // up and down
+		patterns[13] = new int[] {0, 0, 1, 1, 1, 1, 1, 0, 0, 5, TYPE_FIVE_ROW}; // left and right
 		
 		// Three-T shapes
-		patterns[14] = new int[] {0, 0, 0, 1, 1, 1, 0, 1, 1, 5, THREE_T_SCORE}; // 1 left, 1 right, 2 down
-		patterns[15] = new int[] {0, 1, 0, 0, 1, 1, 1, 1, 0, 5, THREE_T_SCORE}; // 1 up, 1 down, 2 right.
-		patterns[16] = new int[] {0, 1, 1, 1, 1, 0, 0, 1, 0, 5, THREE_T_SCORE}; // 1 up, 1 down, 2 left. 
-		patterns[17] = new int[] {1, 1, 0, 1, 1, 1, 0, 0, 0, 5, THREE_T_SCORE}; // 1 left, 1 right, 2 up. 
+		patterns[14] = new int[] {0, 0, 0, 1, 1, 1, 0, 1, 1, 5, TYPE_THREE_T}; // 1 left, 1 right, 2 down
+		patterns[15] = new int[] {0, 1, 0, 0, 1, 1, 1, 1, 0, 5, TYPE_THREE_T}; // 1 up, 1 down, 2 right.
+		patterns[16] = new int[] {0, 1, 1, 1, 1, 0, 0, 1, 0, 5, TYPE_THREE_T}; // 1 up, 1 down, 2 left. 
+		patterns[17] = new int[] {1, 1, 0, 1, 1, 1, 0, 0, 0, 5, TYPE_THREE_T}; // 1 left, 1 right, 2 up. 
 		
 		// Corner shapes
-		patterns[18] = new int[] {0, 0, 1, 1, 1, 0, 0, 1, 1, 5, CORNER_SCORE}; // left, down
-		patterns[19] = new int[] {0, 0, 0, 0, 1, 1, 1, 1, 1, 5, CORNER_SCORE}; // right, down
-		patterns[20] = new int[] {1, 1, 1, 1, 1, 0, 0, 0, 0, 5, CORNER_SCORE}; // left, up
-		patterns[21] = new int[] {1, 1, 0, 0, 1, 1, 1, 0, 0, 5, CORNER_SCORE}; // right, up
+		patterns[18] = new int[] {0, 0, 1, 1, 1, 0, 0, 1, 1, 5, TYPE_CORNER}; // left, down
+		patterns[19] = new int[] {0, 0, 0, 0, 1, 1, 1, 1, 1, 5, TYPE_CORNER}; // right, down
+		patterns[20] = new int[] {1, 1, 1, 1, 1, 0, 0, 0, 0, 5, TYPE_CORNER}; // left, up
+		patterns[21] = new int[] {1, 1, 0, 0, 1, 1, 1, 0, 0, 5, TYPE_CORNER}; // right, up
 		
 		// Four in a row
-		patterns[22] = new int[] {0, 0, 1, 1, 1, 1, 0, 0, 0, 4, FOUR_ROW_SCORE}; // 2 left, 1 right
-		patterns[23] = new int[] {0, 0, 0, 1, 1, 1, 1, 0, 0, 4, FOUR_ROW_SCORE}; // 1 left, 2 right
-		patterns[24] = new int[] {1, 1, 0, 0, 1, 0, 0, 1, 0, 4, FOUR_ROW_SCORE}; // 2 up, 1 down
-		patterns[25] = new int[] {0, 1, 0, 0, 1, 0, 0, 1, 1, 4, FOUR_ROW_SCORE}; // 1 up, 2 down
+		patterns[22] = new int[] {0, 0, 1, 1, 1, 1, 0, 0, 0, 4, TYPE_FOUR_ROW}; // 2 left, 1 right
+		patterns[23] = new int[] {0, 0, 0, 1, 1, 1, 1, 0, 0, 4, TYPE_FOUR_ROW}; // 1 left, 2 right
+		patterns[24] = new int[] {1, 1, 0, 0, 1, 0, 0, 1, 0, 4, TYPE_FOUR_ROW}; // 2 up, 1 down
+		patterns[25] = new int[] {0, 1, 0, 0, 1, 0, 0, 1, 1, 4, TYPE_FOUR_ROW}; // 1 up, 2 down
 				
 		// Three in a row
-		patterns[26] = new int[] {0, 0, 0, 1, 1, 1, 0, 0, 0, 3, THREE_ROW_SCORE}; // 1 left, 1 right
-		patterns[27] = new int[] {0, 0, 0, 0, 1, 1, 1, 0, 0, 3, THREE_ROW_SCORE}; // 2 right
-		patterns[28] = new int[] {0, 0, 1, 1, 1, 0, 0, 0, 0, 3, THREE_ROW_SCORE}; // 2 left
-		patterns[29] = new int[] {0, 1, 0, 0, 1, 0, 0, 1, 0, 3, THREE_ROW_SCORE}; // 1 up, 1 down
-		patterns[30] = new int[] {0, 0, 0, 0, 1, 0, 0, 1, 1, 3, THREE_ROW_SCORE}; // 2 down
-		patterns[31] = new int[] {1, 1, 0, 0, 1, 0, 0, 0, 0, 3, THREE_ROW_SCORE}; // 2 up
+		patterns[26] = new int[] {0, 0, 0, 1, 1, 1, 0, 0, 0, 3, TYPE_THREE_ROW}; // 1 left, 1 right
+		patterns[27] = new int[] {0, 0, 0, 0, 1, 1, 1, 0, 0, 3, TYPE_THREE_ROW}; // 2 right
+		patterns[28] = new int[] {0, 0, 1, 1, 1, 0, 0, 0, 0, 3, TYPE_THREE_ROW}; // 2 left
+		patterns[29] = new int[] {0, 1, 0, 0, 1, 0, 0, 1, 0, 3, TYPE_THREE_ROW}; // 1 up, 1 down
+		patterns[30] = new int[] {0, 0, 0, 0, 1, 0, 0, 1, 1, 3, TYPE_THREE_ROW}; // 2 down
+		patterns[31] = new int[] {1, 1, 0, 0, 1, 0, 0, 0, 0, 3, TYPE_THREE_ROW}; // 2 up
+		
+		for(int i = 0; i < 7; ++i)
+		{
+			patternTypes[i][0] = 0;
+		}
+		
+		patternTypes[TYPE_FIVE_T][1] = FIVE_T_SCORE;
+		patternTypes[TYPE_FOUR_T][1] = FOUR_T_SCORE;
+		patternTypes[TYPE_FIVE_ROW][1] = FIVE_ROW_SCORE;
+		patternTypes[TYPE_THREE_T][1] = THREE_T_SCORE;
+		patternTypes[TYPE_CORNER][1] = CORNER_SCORE;
+		patternTypes[TYPE_FOUR_ROW][1] = FOUR_ROW_SCORE;
+		patternTypes[TYPE_THREE_ROW][1] = THREE_ROW_SCORE;
 	}
 	
 	private void fillGrid()
@@ -192,9 +218,7 @@ public class GameView extends View {
 	public boolean onTouchEvent(MotionEvent event)
 	{
 		int action = event.getAction();
-		
-		
-		
+
 		if(action == MotionEvent.ACTION_DOWN)
 		{
 			
@@ -239,15 +263,13 @@ public class GameView extends View {
 		{
 			dragStarted = false;
 			
-			System.out.print(startX);
-			System.out.print(", ");
-			System.out.print(startY);
-			System.out.print(", ");
-			System.out.print(endX);
-			System.out.print(", ");
-			System.out.println(endY);
-			
-			
+//			System.out.print(startX);
+//			System.out.print(", ");
+//			System.out.print(startY);
+//			System.out.print(", ");
+//			System.out.print(endX);
+//			System.out.print(", ");
+//			System.out.println(endY);
 			
 			Tile temp;
 			boolean failure = false;
@@ -256,20 +278,15 @@ public class GameView extends View {
 			{	
 				if(endX > startX)	// drag right.
 				{
-					temp = tiles[startY][startX + 1];
-					tiles[startY][startX + 1] = tiles[startY][startX];
+					temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY][startX + 1].getType());
+					tiles[startY][startX + 1] = new Tile(mContext, tiles[startY][startX + 1].getXPos(), tiles[startY][startX + 1].getYPos(), tiles[startY][startX].getType());
 					tiles[startY][startX] = temp;
 					
 					if(checkMatch(startY, startX + 1, tiles[startY][startX + 1].getType()))
 					{
 						failure = false;
 					}
-					else
-					{
-						failure = true;
-					}
-						
-					if(checkMatch(startY, startX, tiles[startY][startX].getType()))
+					else if(checkMatch(startY, startX, tiles[startY][startX].getType()))
 					{
 						failure = false;
 					}
@@ -284,28 +301,23 @@ public class GameView extends View {
 					}
 					else
 					{
-						temp = tiles[startY][startX + 1];
-						tiles[startY][startX + 1] = tiles[startY][startX];		// Reverse swap if failure.. 
+						temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY][startX + 1].getType());
+						tiles[startY][startX + 1] = new Tile(mContext, tiles[startY][startX + 1].getXPos(), tiles[startY][startX + 1].getYPos(), tiles[startY][startX].getType());
 						tiles[startY][startX] = temp;
 						playSound(sFailure);
 					}
 				}
 				else if(endX < startX) // drag left
 				{
-					temp = tiles[startY][startX - 1];
-					tiles[startY][startX - 1] = tiles[startY][startX];
+					temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY][startX - 1].getType());
+					tiles[startY][startX - 1] = new Tile(mContext, tiles[startY][startX - 1].getXPos(), tiles[startY][startX - 1].getYPos(), tiles[startY][startX].getType());
 					tiles[startY][startX] = temp;
 					
 					if(checkMatch(startY, startX - 1, tiles[startY][startX - 1].getType()))
 					{
 						failure = false;
 					}
-					else 
-					{
-						failure = true;
-					}
-						
-					if(checkMatch(startY, startX, tiles[startY][startX].getType()))
+					else if(checkMatch(startY, startX, tiles[startY][startX].getType()))
 					{
 						failure = false;
 					}
@@ -320,29 +332,23 @@ public class GameView extends View {
 					}
 					else
 					{
-						temp = tiles[startY][startX - 1];
-						tiles[startY][startX - 1] = tiles[startY][startX];		// Reverse swap if failure.. 
+						temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY][startX - 1].getType());
+						tiles[startY][startX - 1] = new Tile(mContext, tiles[startY][startX - 1].getXPos(), tiles[startY][startX - 1].getYPos(), tiles[startY][startX].getType());
 						tiles[startY][startX] = temp;
 						playSound(sFailure);
-					}
+					}		
 				}
 				else if(endY > startY) // drag down.
 				{
-					temp = new Tile(tiles[startY + 1][startX ]);
-					tiles[startY + 1][startX] = new Tile(tiles[startY][startX]);
+					temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY + 1][startX].getType());
+					tiles[startY + 1][startX] = new Tile(mContext, tiles[startY + 1][startX].getXPos(), tiles[startY + 1][startX].getYPos(), tiles[startY][startX].getType());
 					tiles[startY][startX] = temp;
 					
 					if(checkMatch(startY + 1, startX, tiles[startY + 1][startX].getType()))
 					{
 						failure = false;
 					}
-					else
-					{
-						failure = true;
-					}
-					
-					
-					if(checkMatch(startY, startX, tiles[startY][startX].getType()))
+					else if(checkMatch(startY, startX, tiles[startY][startX].getType()))
 					{
 						failure = false;
 					}
@@ -357,28 +363,23 @@ public class GameView extends View {
 					}
 					else
 					{
-						temp = new Tile(tiles[startY + 1][startX]);
-						tiles[startY + 1][startX] = new Tile(tiles[startY][startX]);		// Reverse swap if failure.. 
+						temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY + 1][startX].getType());
+						tiles[startY + 1][startX] = new Tile(mContext, tiles[startY + 1][startX].getXPos(), tiles[startY + 1][startX].getYPos(), tiles[startY][startX].getType());
 						tiles[startY][startX] = temp;
 						playSound(sFailure);
 					}
 				}
 				else if(endY < startY) // drag up
 				{
-					temp = tiles[startY - 1][startX];
-					tiles[startY - 1][startX] = tiles[startY][startX];
+					temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY - 1][startX].getType());
+					tiles[startY - 1][startX] = new Tile(mContext, tiles[startY - 1][startX].getXPos(), tiles[startY - 1][startX].getYPos(), tiles[startY][startX].getType());
 					tiles[startY][startX] = temp;
 					
 					if(checkMatch(startY - 1, startX, tiles[startY - 1][startX].getType()))
 					{
 						failure = false;
 					}
-					else
-					{
-						failure = true;
-					}
-					
-					if(checkMatch(startY, startX, tiles[startY][startX].getType()))
+					else if(checkMatch(startY, startX, tiles[startY][startX].getType()))
 					{
 						failure = false;
 					}
@@ -393,8 +394,8 @@ public class GameView extends View {
 					}
 					else
 					{
-						temp = tiles[startY - 1][startX];
-						tiles[startY - 1][startX] = tiles[startY][startX];		// Reverse swap if failure.. 
+						temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY - 1][startX].getType());
+						tiles[startY - 1][startX] = new Tile(mContext, tiles[startY - 1][startX].getXPos(), tiles[startY - 1][startX].getYPos(), tiles[startY][startX].getType());
 						tiles[startY][startX] = temp;
 						playSound(sFailure);
 					}
@@ -409,6 +410,7 @@ public class GameView extends View {
 	@Override
 	protected void onDraw(Canvas canvas)
 	{
+		System.out.println("Drawing...");
 		// Fill screen white
 		paint.setStyle(Paint.Style.FILL);
 		paint.setColor(Color.WHITE);
@@ -416,13 +418,13 @@ public class GameView extends View {
 		
 		paint.setAntiAlias(true);
 		paint.setColor(Color.BLACK);
-		paint.setTextSize(30);
+		paint.setTextSize(50);
 		
-		canvas.drawText("Score: " + String.valueOf(mScore), 25, 25, paint);
+		canvas.scale(mScale, mScale);
+		canvas.drawBitmap(background, 0, 0, paint);
+		canvas.drawBitmap(grid, 0, gridOffset, paint);
 		
-		canvas.scale(mScale, mScale);	
-		
-		canvas.drawBitmap(grid, 0, mViewHeight - mViewWidth, paint);
+		canvas.drawText("Score: " + String.valueOf(mScore), 10, 50, paint); // Draw score.
 		
 		for(int i = 0; i < GRIDSIZE; ++i)
 		{
@@ -486,24 +488,24 @@ public class GameView extends View {
 		
 		int sum = 0;
 		
-//		System.out.print("TypeMatch: ");
-//		System.out.print(typeMatch[0]);
-//		System.out.print(", ");
-//		System.out.print(typeMatch[1]);
-//		System.out.print(", ");
-//		System.out.print(typeMatch[2]);
-//		System.out.print(", ");
-//		System.out.print(typeMatch[3]);
-//		System.out.print(", ");
-//		System.out.print(typeMatch[4]);
-//		System.out.print(", ");
-//		System.out.print(typeMatch[5]);
-//		System.out.print(", ");
-//		System.out.print(typeMatch[6]);
-//		System.out.print(", ");
-//		System.out.print(typeMatch[7]);
-//		System.out.print(", ");
-//		System.out.println(typeMatch[8]);
+		System.out.print("TypeMatch: ");
+		System.out.print(typeMatch[0]);
+		System.out.print(", ");
+		System.out.print(typeMatch[1]);
+		System.out.print(", ");
+		System.out.print(typeMatch[2]);
+		System.out.print(", ");
+		System.out.print(typeMatch[3]);
+		System.out.print(", ");
+		System.out.print(typeMatch[4]);
+		System.out.print(", ");
+		System.out.print(typeMatch[5]);
+		System.out.print(", ");
+		System.out.print(typeMatch[6]);
+		System.out.print(", ");
+		System.out.print(typeMatch[7]);
+		System.out.print(", ");
+		System.out.println(typeMatch[8]);
 
 		
 		for(int i = 0; i < NUM_PATTERNS; ++i)
@@ -542,6 +544,11 @@ public class GameView extends View {
 			
 			if(sum >= patterns[i][9])
 			{
+				// Increment pattern counter + score.
+				int patternType = patterns[i][10];
+				patternTypes[patternType][0]++;
+				mScore += patternTypes[patternType][1];
+				
 				clearOut(i, x, y);
 				return true;
 			}
