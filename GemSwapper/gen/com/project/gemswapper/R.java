@@ -12,6 +12,7 @@ public final class R {
     }
     public static final class drawable {
         public static final int achievements_01=0x7f020000;
+<<<<<<< HEAD
         public static final int circle_tile_01=0x7f020001;
         public static final int credits_01=0x7f020002;
         public static final int diamond_tile_01=0x7f020003;
@@ -33,6 +34,28 @@ public final class R {
         public static final int three_and_three_t=0x7f020013;
         public static final int three_in_a_row=0x7f020014;
         public static final int triangle_tile_01=0x7f020015;
+=======
+        public static final int background=0x7f020001;
+        public static final int circle_tile_01=0x7f020002;
+        public static final int credits_01=0x7f020003;
+        public static final int diamond_tile_01=0x7f020004;
+        public static final int five_in_a_row=0x7f020005;
+        public static final int four_in_a_row=0x7f020006;
+        public static final int grid_01=0x7f020007;
+        public static final int high_score_01=0x7f020008;
+        public static final int how_to_play_01=0x7f020009;
+        public static final int ic_action_search=0x7f02000a;
+        public static final int ic_launcer=0x7f02000b;
+        public static final int ic_launcher=0x7f02000c;
+        public static final int quit_game_01=0x7f02000d;
+        public static final int square_tile_01=0x7f02000e;
+        public static final int star_tile_01=0x7f02000f;
+        public static final int start_game_01=0x7f020010;
+        public static final int three_and_three_corner=0x7f020011;
+        public static final int three_and_three_t=0x7f020012;
+        public static final int three_in_a_row=0x7f020013;
+        public static final int triangle_tile_01=0x7f020014;
+>>>>>>> 3bef37ff9ca7155174e229cdb69b8434afd3a0dc
     }
     public static final class id {
         public static final int achievements_button=0x7f080014;
