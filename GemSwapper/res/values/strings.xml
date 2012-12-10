@@ -62,5 +62,7 @@
     <string name="title_activity_achievements">Achievements</string>
     <string name="title_activity_how_to">HowToActivity</string>
     <string name="title_activity_database">Database</string>
+    <string name="title_activity_high_score_score">HighScore - Score</string>
+    <string name="title_activity_high_score_achievements">HighScore - Achievements</string>
 
 </resources>

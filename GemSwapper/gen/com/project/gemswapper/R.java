@@ -12,25 +12,28 @@ public final class R {
     }
     public static final class drawable {
         public static final int achievements_01=0x7f020000;
-        public static final int circle_tile_01=0x7f020001;
-        public static final int credits_01=0x7f020002;
-        public static final int diamond_tile_01=0x7f020003;
-        public static final int five_in_a_row=0x7f020004;
-        public static final int four_in_a_row=0x7f020005;
-        public static final int grid_01=0x7f020006;
-        public static final int high_score_01=0x7f020007;
-        public static final int how_to_play_01=0x7f020008;
-        public static final int ic_action_search=0x7f020009;
-        public static final int ic_launcer=0x7f02000a;
-        public static final int ic_launcher=0x7f02000b;
-        public static final int quit_game_01=0x7f02000c;
-        public static final int square_tile_01=0x7f02000d;
-        public static final int star_tile_01=0x7f02000e;
-        public static final int start_game_01=0x7f02000f;
-        public static final int three_and_three_corner=0x7f020010;
-        public static final int three_and_three_t=0x7f020011;
-        public static final int three_in_a_row=0x7f020012;
-        public static final int triangle_tile_01=0x7f020013;
+        public static final int background=0x7f020001;
+        public static final int circle_tile_01=0x7f020002;
+        public static final int credits_01=0x7f020003;
+        public static final int diamond_tile_01=0x7f020004;
+        public static final int five_in_a_row=0x7f020005;
+        public static final int four_in_a_row=0x7f020006;
+        public static final int grid_01=0x7f020007;
+        public static final int high_score_01=0x7f020008;
+        public static final int highscore_achievements_01=0x7f020009;
+        public static final int highscore_score_01=0x7f02000a;
+        public static final int how_to_play_01=0x7f02000b;
+        public static final int ic_action_search=0x7f02000c;
+        public static final int ic_launcer=0x7f02000d;
+        public static final int ic_launcher=0x7f02000e;
+        public static final int quit_game_01=0x7f02000f;
+        public static final int square_tile_01=0x7f020010;
+        public static final int star_tile_01=0x7f020011;
+        public static final int start_game_01=0x7f020012;
+        public static final int three_and_three_corner=0x7f020013;
+        public static final int three_and_three_t=0x7f020014;
+        public static final int three_in_a_row=0x7f020015;
+        public static final int triangle_tile_01=0x7f020016;
     }
     public static final class id {
         public static final int achievements_button=0x7f080015;
@@ -61,22 +64,28 @@ public final class R {
         public static final int text1=0x7f080000;
     }
     public static final class layout {
-        public static final int achievements_row=0x7f030000;
-        public static final int activity_achievements=0x7f030001;
-        public static final int activity_credits=0x7f030002;
-        public static final int activity_game=0x7f030003;
-        public static final int activity_highscore=0x7f030004;
-        public static final int activity_how_to=0x7f030005;
-        public static final int activity_main=0x7f030006;
-        public static final int listplaceholder=0x7f030007;
+        public static final int achievement=0x7f030000;
+        public static final int achievements_row=0x7f030001;
+        public static final int activity_achievements=0x7f030002;
+        public static final int activity_credits=0x7f030003;
+        public static final int activity_game=0x7f030004;
+        public static final int activity_high_score_achievements=0x7f030005;
+        public static final int activity_high_score_score=0x7f030006;
+        public static final int activity_highscore=0x7f030007;
+        public static final int activity_how_to=0x7f030008;
+        public static final int activity_main=0x7f030009;
+        public static final int listplaceholder=0x7f03000a;
+        public static final int score=0x7f03000b;
     }
     public static final class menu {
         public static final int activity_achievements=0x7f070000;
         public static final int activity_database=0x7f070001;
         public static final int activity_game=0x7f070002;
-        public static final int activity_highscore=0x7f070003;
-        public static final int activity_how_to=0x7f070004;
-        public static final int activity_main=0x7f070005;
+        public static final int activity_high_score_achievements=0x7f070003;
+        public static final int activity_high_score_score=0x7f070004;
+        public static final int activity_highscore=0x7f070005;
+        public static final int activity_how_to=0x7f070006;
+        public static final int activity_main=0x7f070007;
     }
     public static final class raw {
         public static final int failure=0x7f040000;
@@ -137,6 +146,8 @@ public final class R {
         public static final int title_activity_credits=0x7f050004;
         public static final int title_activity_database=0x7f05002e;
         public static final int title_activity_game=0x7f05002b;
+        public static final int title_activity_high_score_achievements=0x7f050030;
+        public static final int title_activity_high_score_score=0x7f05002f;
         public static final int title_activity_highscore=0x7f050003;
         public static final int title_activity_how_to=0x7f05002d;
         /**  activities 
