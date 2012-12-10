@@ -38,6 +38,8 @@ public class MainActivity extends Activity implements OnClickListener {
         highScoreButton.setOnClickListener(this);
         creditsButton.setOnClickListener(this);
         quitButton.setOnClickListener(this);
+        
+        //DatabaseHelper gemswapperDatabase = new DatabaseHelper(this);
     }
     
     public void onClick(View v)
