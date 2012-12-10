@@ -15,8 +15,6 @@ import android.widget.TabWidget;
 
 public class HighscoreActivity extends TabActivity implements OnTabChangeListener 
 {
-	private TabHost tabHost;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{

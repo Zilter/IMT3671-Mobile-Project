@@ -45,5 +45,12 @@
     <string name="title_activity_how_to">HowToActivity</string>
     <string name="title_activity_high_score_score">HighScore - Score</string>
     <string name="title_activity_high_score_achievements">HighScore - Achievements</string>
+    <string name="title_activity_get_user">GetUser</string>
 
+    <!--  Activity - Get User -->
+    <string name="getName">Insert your username</string>
+    <string name="editTextHint">username</string>
+    <string name="buttonText">OK</string>
+    <string name="toastUser">Your username is: </string>
+    <string name="errorBack">You must choose a username first! </string>
 </resources>
