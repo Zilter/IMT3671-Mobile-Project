@@ -41,7 +41,6 @@ public class MainActivity extends Activity implements OnClickListener {
         creditsButton.setOnClickListener(this);
         quitButton.setOnClickListener(this);
         
-<<<<<<< HEAD
 //        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 //        SharedPreferences.Editor editor = preferences.edit();
 //        editor.putString("Name","Garlov");
@@ -55,9 +54,8 @@ public class MainActivity extends Activity implements OnClickListener {
     		Intent GetUserIntent = new Intent(this, GetUser.class);
     		startActivity(GetUserIntent);
         }
-=======
+
         //DatabaseHelper gemswapperDatabase = new DatabaseHelper(this);
->>>>>>> 4e5c1b28644581dab812d916ed69867721c31441
     }
     
     public void onClick(View v)
