@@ -51,6 +51,14 @@
     <string name="score">Score</string>
     <string name="scoreDescription">Get as many points as you can in one game</string>
     <string name="no_achievements">Something has gone terribly wrong, there are noe achievements here!</string>
+    <string name="text2desc">Times Completed:</string>
+    <string name="progress">Progress:</string>
+    <string name="slash">/</string>
+    <string name="reward">Reward:</string>
+    <string name="points">Points</string>
+    <string name="text6desc">How to obtain:</string>
+    <string name="imageInfoStar">Achievement icon</string>
+    
 
     <!-- Activity - Credits -->
     <string name="creditsMain">Credits</string>

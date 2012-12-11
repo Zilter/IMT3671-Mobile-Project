@@ -54,10 +54,10 @@ public class HighscoreActivity extends TabActivity implements OnTabChangeListene
     	for (int i = 0; i < tw.getChildCount(); i++) 
     	{
             View v = tw.getChildAt(i);
-            v.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            v.setBackgroundColor(Color.parseColor("#33CCFF"));
             if(i == getTabHost().getCurrentTab())
             {
-            	v.setBackgroundColor(Color.parseColor("#000000"));
+            	v.setBackgroundColor(Color.parseColor("#003DF5"));
             }
     	}
     	
@@ -71,10 +71,10 @@ public class HighscoreActivity extends TabActivity implements OnTabChangeListene
     	for (int i = 0; i < tw.getChildCount(); i++) 
     	{
             View v = tw.getChildAt(i);
-            v.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            v.setBackgroundColor(Color.parseColor("#33CCFF"));
             if(i == getTabHost().getCurrentTab())
             {
-            	v.setBackgroundColor(Color.parseColor("#000000"));
+            	v.setBackgroundColor(Color.parseColor("#003DF5"));
             }
     	}
     }
