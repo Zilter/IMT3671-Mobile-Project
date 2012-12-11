@@ -29,6 +29,7 @@ public class EndgameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_endgame);
         
+        
         typeface = Typeface.createFromAsset(getAssets(), "IMPACT.TTF");
         scoreString = finishedGame.getStringExtra(GameView.SCORE);
         

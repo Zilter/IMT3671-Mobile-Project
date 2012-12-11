@@ -135,13 +135,23 @@ public final class R {
         public static final int fourDescription=0x7f050020;
         /**  Activity - Get User 
          */
+<<<<<<< HEAD
         public static final int getName=0x7f050037;
+=======
+        public static final int getName=0x7f050030;
+        public static final int hello_world=0x7f050038;
+>>>>>>> 784be499f3e55c164bf3808abd3b8856e1429d39
         /**  Activity - High Score 
          */
         public static final int highScoreMain=0x7f050033;
         public static final int high_score=0x7f050010;
+<<<<<<< HEAD
         public static final int highscore=0x7f050035;
         /**      Activity - End Game  
+=======
+        public static final int highscore=0x7f05002e;
+        /**  Activity - End Game 
+>>>>>>> 784be499f3e55c164bf3808abd3b8856e1429d39
          */
         public static final int highscore_main=0x7f05003c;
         public static final int howToImage1=0x7f050017;
