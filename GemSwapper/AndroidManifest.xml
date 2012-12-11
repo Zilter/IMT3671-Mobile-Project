@@ -99,12 +99,12 @@
         </activity>
         <activity
             android:name=".EndgameActivity"
-            android:label="@string/title_activity_endgame" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_endgame"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.project.gemswapper.MainActivity" />
         </activity>
     </application>
 

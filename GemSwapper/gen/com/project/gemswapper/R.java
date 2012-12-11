@@ -128,12 +128,13 @@ public final class R {
         /**  Activity - Get User 
          */
         public static final int getName=0x7f050030;
+        public static final int hello_world=0x7f050038;
         /**  Activity - High Score 
          */
         public static final int highScoreMain=0x7f05002c;
         public static final int high_score=0x7f050010;
         public static final int highscore=0x7f05002e;
-        /**      Activity - End Game  
+        /**  Activity - End Game 
          */
         public static final int highscore_main=0x7f050035;
         public static final int howToImage1=0x7f050017;

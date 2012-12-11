@@ -5,17 +5,17 @@
     <string name="menu_settings">Settings</string>
 
     <!-- activities -->
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_highscore">HighscoreActivity</string>
-    <string name="title_activity_credits">CreditsActivity</string>
+    <string name="title_activity_main">Gemswapper</string>
+    <string name="title_activity_highscore">Highscore</string>
+    <string name="title_activity_credits">Credits</string>
     <string name="title_activity_game">Game</string>
     <string name="title_activity_achievements">Achievements</string>
-    <string name="title_activity_how_to">HowToActivity</string>
+    <string name="title_activity_how_to">HowTo</string>
     <string name="title_activity_database">Database</string>
     <string name="title_activity_high_score_score">HighScore - Score</string>
     <string name="title_activity_high_score_achievements">HighScore - Achievements</string>
     <string name="title_activity_get_user">GetUser</string>
-    <string name="title_activity_endgame">EndgameActivity</string>
+    <string name="title_activity_endgame">Endgame</string>
 
     <!-- Main Menu & Menu Buttons -->
     <string name="start_game">Start Game</string>
@@ -63,18 +63,17 @@
     <string name="highscore">Score:\t</string>
     <string name="loading">Please wait, loading data</string>
 
-
     <!-- Activity - Get User -->
     <string name="getName">Insert your username</string>
     <string name="editTextHint">username</string>
     <string name="buttonText">OK</string>
     <string name="toastUser">Your username is: </string>
     <string name="errorBack">You must choose a username first! </string>
-    
-    <!--     Activity - End Game  -->
-	<string name="highscore_main">Your score was:\t\t</string>
+
+    <!-- Activity - End Game -->
+    <string name="highscore_main">Your score was:\t\t</string>
     <string name="button_quit">Quit</string>
     <string name="button_submit">Submit and Restart</string>
-   
+    <string name="hello_world">Hello world!</string>
 
 </resources>
