@@ -23,6 +23,7 @@ public class EndgameActivity extends Activity {
 	
 	Intent finishedGame = getIntent();
 	String scoreString;
+	String achievementPoints;
 	Typeface typeface;
 
     @Override
@@ -64,6 +65,9 @@ public class EndgameActivity extends Activity {
      	
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         
+        String urlToSend = "";
+        String coreUrl = "";
+        
         String name = preferences.getString("Name","");
         String id = preferences.getString("Id","");
         
@@ -75,17 +79,18 @@ public class EndgameActivity extends Activity {
 	        SharedPreferences.Editor editor = preferences.edit();
 	        editor.putInt("Score",currentScore);
 	        editor.commit();
+	        
+	        urlToSend = coreUrl + "id=" + id + "&" + "name=" + name + "&" + "score" + scoreString;
         }
         
-     	String coreUrl = "http://game-details.com/gemswapper/insertscore.php?";
-        String urlToSend = coreUrl + "id=" + id + "&" + "name=" + name + "&" + "score" + scoreString;
+     	coreUrl = "http://game-details.com/gemswapper/insertscore.php?";
+        
      	
 //     	System.out.println(urlToSend);
      	HttpGet getScore = new HttpGet(urlToSend);
      	
      	coreUrl = "http://game-details.com/gemswapper/insertachievements.php?";
-     	////!!!!!!!!!!!!!UNCOMMENT WHEN ACHIEVEMENTPOINTS ARE CALCULATED!!!!!!!!!!!!!!!!!////
-        //urlToSend = coreUrl + "id=" + id + "&" + "name=" + name + "&" + "achievements" + achievementPoints;
+        urlToSend = coreUrl + "id=" + id + "&" + "name=" + name + "&" + "achievements" + achievementPoints;
      	
      	HttpGet getAchievement = new HttpGet(urlToSend);
      	
@@ -132,24 +137,30 @@ public class EndgameActivity extends Activity {
  	
  	public void updateDB()
  	{
- 		int oldCurrents[] = new int[7];
- 		int oldCompleteds[] = new int[7];
- 		int newCurrents[] = new int[7];
- 		int newCompleteds[] = new int[7];
- 		int progressCurrents[];
- 		
  		DatabaseAdapter mDbHelper;
  		mDbHelper = new DatabaseAdapter(this);
  		mDbHelper.open();
  		
- 		Cursor numberOfAchievements = mDbHelper.fetchAll();
+ 		Cursor numberOfAchievementsCursor = mDbHelper.fetchAll();
+ 		int numberOfAchievements = numberOfAchievementsCursor.getCount();
+ 		
+ 		
+ 		int oldCurrents[] = new int[numberOfAchievements];
+ 		int oldCompleteds[] = new int[numberOfAchievements];
+ 		int newCurrents[] = new int[numberOfAchievements];
+ 		int newCompleteds[] = new int[numberOfAchievements];
+ 		int progressCurrents[] = new int[numberOfAchievements];
+ 		
+ 		int pointsTemp = 0;
+ 		
  	
  		progressCurrents = finishedGame.getIntArrayExtra(GameView.COUNTERS);
  		
- 		for (int i = 0; i < numberOfAchievements.getCount(); i++)
+ 		for (int i = 0; i < numberOfAchievements; i++)
  		{
  			Cursor achievement = mDbHelper.fetch(i);
  			int goal = achievement.getInt(achievement.getColumnIndexOrThrow("Goal"));
+ 			int pointValue = achievement.getInt(achievement.getColumnIndexOrThrow("PointValue"));
 
  			oldCurrents[i] = achievement.getInt(achievement.getColumnIndexOrThrow("Current"));
  			oldCompleteds[i] = achievement.getInt(achievement.getColumnIndexOrThrow("Completed"));
@@ -157,8 +168,9 @@ public class EndgameActivity extends Activity {
  			newCurrents[i] = oldCurrents[i] + progressCurrents[i] % goal;
  			
  			mDbHelper.update(i, newCompleteds[i], newCurrents[i]);
- 			
+ 			pointsTemp += (newCompleteds[i] * pointValue);
  		}
+ 		achievementPoints = Integer.toString(pointsTemp);
  		
  	}
  	

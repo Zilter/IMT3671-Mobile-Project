@@ -29,7 +29,7 @@ public class Achievements extends ListActivity  {
         String[] from = new String[] { DatabaseAdapter.KEY_NAME, DatabaseAdapter.KEY_COMPLETED , DatabaseAdapter.KEY_CURRENT, DatabaseAdapter.KEY_GOAL, DatabaseAdapter.KEY_POINTVALUE, DatabaseAdapter.KEY_DESC };
         int[] to = new int[] { R.id.text1, R.id.text2, R.id.text3, R.id.text4, R.id.text5, R.id.text6};
         
-        // Now create an array adapter and set it to display using our row
+        // The rest of this is also deprecated, but it works
         SimpleCursorAdapter achievements =
             new SimpleCursorAdapter(this, R.layout.achievements_row, AchievementCursor, from, to);
         setListAdapter(achievements);

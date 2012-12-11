@@ -56,12 +56,14 @@ public class DatabaseAdapter {
 			
 			
 			db.execSQL(DATABASE_CREATE);
-			db.execSQL(DATABASE_FILL +	" ('Lines of Three', 40, 20, 'Match three gems')");
-			db.execSQL(DATABASE_FILL +	" ('Lines of Four', 25, 25, 'Match four gems')");
+			db.execSQL(DATABASE_FILL +	" ('Ultra T', 1, 25, 'Match seven gems in a T-shape')");
+			db.execSQL(DATABASE_FILL +	" ('Super T', 5, 25, 'Match six gems in a T-shape')");
 			db.execSQL(DATABASE_FILL +	" ('Lines of Five', 10, 20, 'Match five gems in a straight line')");
-			db.execSQL(DATABASE_FILL +	" ('Corner Shapes', 15, 20, 'Match gems in a corner shape')");
 			db.execSQL(DATABASE_FILL +	" ('T-Shapes', 15, 20, 'Match gems in a T-shape')");
-			db.execSQL(DATABASE_FILL +	" ('Score', 1000, 25, 'Get as many points as you can in one game')");
+			db.execSQL(DATABASE_FILL +	" ('Corner Shapes', 15, 20, 'Match gems in a corner shape')");
+			db.execSQL(DATABASE_FILL +	" ('Lines of Four', 25, 25, 'Match four gems')");
+			db.execSQL(DATABASE_FILL +	" ('Lines of Three', 40, 20, 'Match three gems')");
+			db.execSQL(DATABASE_FILL +	" ('Score', 10000, 25, 'Get as many points as you can')");
 			
 			
 		}

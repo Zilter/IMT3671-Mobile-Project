@@ -575,14 +575,15 @@ public class GameView extends View {
 		Context context = getContext();
 		Intent intent = new Intent(context, EndgameActivity.class);
 		
-		String score = String.valueOf(mScore);
 		int counters[] = new int[7];
 		
 		for (int i = 0; i < patternTypes.length; i++)
 		{
 			counters[i] = patternTypes[i][0];
 		}
+		counters[patternTypes.length+1] = mScore;
 		
+		String score = String.valueOf(mScore);
 		
 		intent.putExtra(SCORE, score);
 		intent.putExtra(COUNTERS, counters);
