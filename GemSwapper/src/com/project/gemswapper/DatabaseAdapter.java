@@ -21,7 +21,7 @@ public class DatabaseAdapter {
     
     private static final String DATABASE_NAME = "GemswapperDb";
     private static final String DATABASE_TABLE = "Achievements";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
 	private DatabaseHelper mDbHelper;
 	private SQLiteDatabase mDb;
@@ -75,6 +75,7 @@ public class DatabaseAdapter {
 	        // Create tables again
 	        onCreate(db);
 		}
+		
 	}
 
 	
@@ -136,8 +137,8 @@ public class DatabaseAdapter {
 
         Cursor mCursor = mDb.query(true, DATABASE_TABLE, 
             		new String[] {KEY_ROWID, KEY_NAME, KEY_COMPLETED, KEY_GOAL, KEY_CURRENT, KEY_POINTVALUE, KEY_DESC},
-            		KEY_ROWID + "=" + rowId, null,
-                    null, null, null, null);
+            		KEY_ROWID + "=" + rowId,
+            		null, null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
@@ -145,29 +146,18 @@ public class DatabaseAdapter {
 
     }
 
-    /**
-     * Update the note using the details provided. The note to be updated is
-     * specified using the rowId, and it is altered to use the title and body
-     * values passed in
-     * 
-     * @param rowId id of note to update
-     * @param title value to set note title to
-     * @param body value to set note body to
-     * @return true if the note was successfully updated, false otherwise
-     */
     
-    public boolean update(int rowId, String name, int completed, int goal, int current, int pointValue, String description) {
-        ContentValues args = new ContentValues();
-        args.put(KEY_NAME, name);
-        args.put(KEY_COMPLETED, completed);
-        args.put(KEY_GOAL, goal);
-        args.put(KEY_CURRENT, current);
-        args.put(KEY_POINTVALUE, pointValue);
-        args.put(KEY_DESC, description);
-        
-        
-        return mDb.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
+    
+    public void update(int rowId, int completed, int current) {
+    	ContentValues args = new ContentValues();
+    	
+    	args.put(KEY_COMPLETED, completed);
+    	args.put(KEY_CURRENT, current);
+    	
+    	mDb.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null);
     }
+    
+   
 }
 	
     

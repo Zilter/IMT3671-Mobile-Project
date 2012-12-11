@@ -1,6 +1,5 @@
 package com.project.gemswapper;
 
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
@@ -31,8 +30,7 @@ public class EndgameActivity extends Activity {
         setContentView(R.layout.activity_endgame);
         
         typeface = Typeface.createFromAsset(getAssets(), "IMPACT.TTF");
-        
-        //scoreString = finishedGame.getStringExtra(GameView.SCORE);
+        scoreString = finishedGame.getStringExtra(GameView.SCORE);
         
         
         TextView highscore_main = (TextView) findViewById(R.id.highscore_main);
@@ -111,23 +109,31 @@ public class EndgameActivity extends Activity {
  	
  	public void updateDB()
  	{
- 		int oldCurrents[];
- 		int newCurrents[];
- 		int newCompleteds[];
- 		int newTotalPoints[];
+ 		int oldCurrents[] = new int[7];
+ 		int oldCompleteds[] = new int[7];
+ 		int newCurrents[] = new int[7];
+ 		int newCompleteds[] = new int[7];
+ 		int progressCurrents[];
  		
  		DatabaseAdapter mDbHelper;
  		mDbHelper = new DatabaseAdapter(this);
  		mDbHelper.open();
  		
- 		Cursor cursor = mDbHelper.fetchAll();
+ 		Cursor numberOfAchievements = mDbHelper.fetchAll();
  	
- 		//newCurrents = finishedGame.getIntArrayExtra(counters);
+ 		progressCurrents = finishedGame.getIntArrayExtra(GameView.COUNTERS);
  		
- 		for (int i = 0; i < cursor.getCount(); i++)
+ 		for (int i = 0; i < numberOfAchievements.getCount(); i++)
  		{
- 		//	oldCurrents[i] = cursor.getInt(4);
- 			//newCurrents[i] = oldCurrents[i] + newCurrents[i] % cursor.getInt(3);
+ 			Cursor achievement = mDbHelper.fetch(i);
+ 			int goal = achievement.getInt(achievement.getColumnIndexOrThrow("Goal"));
+
+ 			oldCurrents[i] = achievement.getInt(achievement.getColumnIndexOrThrow("Current"));
+ 			oldCompleteds[i] = achievement.getInt(achievement.getColumnIndexOrThrow("Completed"));
+ 			newCompleteds[i] = (oldCompleteds[i] * goal + progressCurrents[i]) / goal;
+ 			newCurrents[i] = oldCurrents[i] + progressCurrents[i] % goal;
+ 			
+ 			mDbHelper.update(i, newCompleteds[i], newCurrents[i]);
  			
  		}
  		

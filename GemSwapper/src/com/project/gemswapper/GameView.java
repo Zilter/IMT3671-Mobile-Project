@@ -3,6 +3,7 @@ package com.project.gemswapper;
 import java.util.Random;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +18,9 @@ import android.view.View;
 
 public class GameView extends View {
 
+	public final static String SCORE = "com.project.gemswapper.SCORE";
+	public final static String COUNTERS = "com.project.gemswapper.COUNTERS";
+	
 	private final int GRIDSIZE = 8;
 	private final int NUM_PATTERNS = 32;
 	
@@ -564,5 +568,25 @@ public class GameView extends View {
 	private void playSound(int type)
 	{
 		sounds.play(type, 1.0f, 1.0f, 0, 0, 1.0f);
+	}
+	
+	private void endGame()
+	{
+		Context context = getContext();
+		Intent intent = new Intent(context, EndgameActivity.class);
+		
+		String score = String.valueOf(mScore);
+		int counters[] = new int[7];
+		
+		for (int i = 0; i < patternTypes.length; i++)
+		{
+			counters[i] = patternTypes[i][0];
+		}
+		
+		
+		intent.putExtra(SCORE, score);
+		intent.putExtra(COUNTERS, counters);
+		
+		context.startActivity(intent);
 	}
 }
