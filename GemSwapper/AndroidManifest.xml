@@ -91,11 +91,20 @@
         </activity>
         <activity
             android:name=".GetUser"
-    		android:theme="@android:style/Theme.Dialog"
-            android:label="@string/title_activity_get_user" >
+            android:label="@string/title_activity_get_user"
+            android:theme="@android:style/Theme.Dialog" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.project.gemswapper.MainActivity" />
+        </activity>
+        <activity
+            android:name=".EndgameActivity"
+            android:label="@string/title_activity_endgame" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

@@ -21,37 +21,35 @@ public class DatabaseAdapter {
     
     private static final String DATABASE_NAME = "GemswapperDb";
     private static final String DATABASE_TABLE = "Achievements";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
 
 	private DatabaseHelper mDbHelper;
 	private SQLiteDatabase mDb;
 	
+	private final Context mCtx;
 	
 	/**
      * Database creation sql statement
      */
 	
-	private static final String DATABASE_CREATE =
+	private static final String DATABASE_CREATE =  
 			"CREATE TABLE Achievements (" +
 					"_id INTEGER PRIMARY KEY AUTOINCREMENT," +
 					"Name TEXT NOT NULL," +
 					"Completed INTEGER NOT NULL DEFAULT '0'," +
 					"Goal INTEGER NOT NULL," +
 					"Current INTEGER NOT NULL DEFAULT '0'," +
-					"Pointvalue INTEGER NOT NULL," +
+					"PointValue INTEGER NOT NULL," +
 					"Description TEXT NOT NULL)";
 	
-	private static final String DATABASE_FILL = "INSERT INTO Achievements (Name, Goal, PointValue, Description) VALUES" +
-			" (" + R.string.three + ", 40, 20, " + R.string.threeDescription +")," +
-			" (" + R.string.four + ", 25, 25, " + R.string.fourDescription +")," +
-			" (" + R.string.five + ", 10, 20, " + R.string.fiveDescription +")," +
-			" (" + R.string.corner + ", 15, 20, " + R.string.cornerDescription +")," +
-			" (" + R.string.tShape + ", 15, 20, " + R.string.tShapeDescription +")," +
-			" (" + R.string.score + ", 1000, 25, " + R.string.scoreDescription +")," +
-			" (" + R.string.time + ", 60, 25, " + R.string.timeDescription +")";
-
+	private static  String DATABASE_FILL = "INSERT INTO Achievements (Name, Goal, PointValue, Description) VALUES " +
+			" ('Lines of Three', 40, 20, 'Match three gems')," +
+			" ('Lines of Four', 25, 25, 'Match four gems')," +
+			" ('Lines of Five', 10, 20, 'Match five gems in a straight line')," +
+			" ('Corner Shapes', 15, 20, 'Match gems in a corner shape')," +
+			" ('T-Shapes', 15, 20, 'Match gems in a T-shape')," +
+			" ('Score', 1000, 25, 'Get as many points as you can in one game')";
 	
-	private final Context mCtx;
 	
 		
 	private static class DatabaseHelper extends SQLiteOpenHelper {
@@ -63,14 +61,19 @@ public class DatabaseAdapter {
 		
 		@Override
 		public void onCreate (SQLiteDatabase db) {
-
+			
+			
 			db.execSQL(DATABASE_CREATE);
 			db.execSQL(DATABASE_FILL);
 		}
 		
 		@Override
-		public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
-			//If the version is changed, the code in here will be run
+		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+			 // Drop older table if existed
+	        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
+	 
+	        // Create tables again
+	        onCreate(db);
 		}
 	}
 
@@ -113,7 +116,7 @@ public class DatabaseAdapter {
      * @return Cursor over all achievements
      */
     
-    public Cursor fetchAllNotes() {
+    public Cursor fetchAll() {
 
         return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_NAME, KEY_COMPLETED, KEY_GOAL, KEY_CURRENT, KEY_POINTVALUE, KEY_DESC},
         		null, null, null, null, null);
@@ -129,11 +132,9 @@ public class DatabaseAdapter {
      * @throws SQLException if note could not be found/retrieved
      */
     
-    public Cursor fetchNote(long rowId) throws SQLException {
+    public Cursor fetch(long rowId) throws SQLException {
 
-        Cursor mCursor =
-
-            mDb.query(true, DATABASE_TABLE, 
+        Cursor mCursor = mDb.query(true, DATABASE_TABLE, 
             		new String[] {KEY_ROWID, KEY_NAME, KEY_COMPLETED, KEY_GOAL, KEY_CURRENT, KEY_POINTVALUE, KEY_DESC},
             		KEY_ROWID + "=" + rowId, null,
                     null, null, null, null);
@@ -155,7 +156,7 @@ public class DatabaseAdapter {
      * @return true if the note was successfully updated, false otherwise
      */
     
-    public boolean updateNote(int rowId, String name, int completed, int goal, int current, int pointValue, String description) {
+    public boolean update(int rowId, String name, int completed, int goal, int current, int pointValue, String description) {
         ContentValues args = new ContentValues();
         args.put(KEY_NAME, name);
         args.put(KEY_COMPLETED, completed);
