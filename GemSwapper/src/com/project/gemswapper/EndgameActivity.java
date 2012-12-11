@@ -1,16 +1,19 @@
 package com.project.gemswapper;
 
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
@@ -59,18 +62,37 @@ public class EndgameActivity extends Activity {
  	{
      	DefaultHttpClient httpClient = new DefaultHttpClient();
      	
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        
+        String name = preferences.getString("Name","");
+        String id = preferences.getString("Id","");
+        
+        int formerScore = preferences.getInt("Score",0);
+        int currentScore = Integer.parseInt(scoreString);
+        
+        if(currentScore > formerScore)
+        {
+	        SharedPreferences.Editor editor = preferences.edit();
+	        editor.putInt("Score",currentScore);
+	        editor.commit();
+        }
+        
+     	String coreUrl = "http://game-details.com/gemswapper/insertscore.php?";
+        String urlToSend = coreUrl + "id=" + id + "&" + "name=" + name + "&" + "score" + scoreString;
      	
-     	//Øyvind, you're up:
-     	//String coreUrl = "http://game-details.com/tiltaball/insert.php?";
-        //String urlToSend = coreUrl + "name=" + name + "&" + "time=" + score;
+//     	System.out.println(urlToSend);
+     	HttpGet getScore = new HttpGet(urlToSend);
      	
-     	//System.out.println(urlToSend);
+     	coreUrl = "http://game-details.com/gemswapper/insertachievements.php?";
+     	////!!!!!!!!!!!!!UNCOMMENT WHEN ACHIEVEMENTPOINTS ARE CALCULATED!!!!!!!!!!!!!!!!!////
+        //urlToSend = coreUrl + "id=" + id + "&" + "name=" + name + "&" + "achievements" + achievementPoints;
      	
-     	//HttpGet get = new HttpGet(urlToSend);
+     	HttpGet getAchievement = new HttpGet(urlToSend);
      	
      	try 
      	{
- 			//httpClient.execute(get);
+ 			httpClient.execute(getScore);
+ 			httpClient.execute(getAchievement);
  		} 
      	catch (Exception e) 
      	{

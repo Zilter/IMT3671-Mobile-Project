@@ -3,6 +3,8 @@ package com.project.gemswapper;
 import android.app.ListActivity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager.LayoutParams;
 import android.widget.SimpleCursorAdapter;
 
 public class Achievements extends ListActivity  {
@@ -11,6 +13,10 @@ public class Achievements extends ListActivity  {
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+		
+        requestWindowFeature(Window.FEATURE_NO_TITLE); // Hide title
+        getWindow().setFlags(0xFFFFFFFF,  LayoutParams.FLAG_FULLSCREEN | LayoutParams.FLAG_KEEP_SCREEN_ON);
+		
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
         
