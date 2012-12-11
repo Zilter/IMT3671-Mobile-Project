@@ -21,7 +21,7 @@ public class DatabaseAdapter {
     
     private static final String DATABASE_NAME = "GemswapperDb";
     private static final String DATABASE_TABLE = "Achievements";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
 	private DatabaseHelper mDbHelper;
 	private SQLiteDatabase mDb;
@@ -42,15 +42,7 @@ public class DatabaseAdapter {
 					"PointValue INTEGER NOT NULL," +
 					"Description TEXT NOT NULL)";
 	
-	private static  String DATABASE_FILL = "INSERT INTO Achievements (Name, Goal, PointValue, Description) VALUES " +
-			" ('Lines of Three', 40, 20, 'Match three gems')," +
-			" ('Lines of Four', 25, 25, 'Match four gems')," +
-			" ('Lines of Five', 10, 20, 'Match five gems in a straight line')," +
-			" ('Corner Shapes', 15, 20, 'Match gems in a corner shape')," +
-			" ('T-Shapes', 15, 20, 'Match gems in a T-shape')," +
-			" ('Score', 1000, 25, 'Get as many points as you can in one game')";
-	
-	
+	private static  String DATABASE_FILL = "INSERT INTO Achievements (Name, Goal, PointValue, Description) VALUES ";
 		
 	private static class DatabaseHelper extends SQLiteOpenHelper {
 	
@@ -64,7 +56,14 @@ public class DatabaseAdapter {
 			
 			
 			db.execSQL(DATABASE_CREATE);
-			db.execSQL(DATABASE_FILL);
+			db.execSQL(DATABASE_FILL +	" ('Lines of Three', 40, 20, 'Match three gems')");
+			db.execSQL(DATABASE_FILL +	" ('Lines of Four', 25, 25, 'Match four gems')");
+			db.execSQL(DATABASE_FILL +	" ('Lines of Five', 10, 20, 'Match five gems in a straight line')");
+			db.execSQL(DATABASE_FILL +	" ('Corner Shapes', 15, 20, 'Match gems in a corner shape')");
+			db.execSQL(DATABASE_FILL +	" ('T-Shapes', 15, 20, 'Match gems in a T-shape')");
+			db.execSQL(DATABASE_FILL +	" ('Score', 1000, 25, 'Get as many points as you can in one game')");
+			
+			
 		}
 		
 		@Override
