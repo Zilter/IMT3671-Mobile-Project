@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/highscore_main"
+        style="@style/MenuFont"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/highscore_score"
+        style="@style/MenuFont"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/highscore_main" />
+
+    <Button
+        android:id="@+id/button_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:onClick="Submit"
+        android:text="@string/button_submit" />
+
+    <Button
+        android:id="@+id/button_quit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_submit"
+        android:layout_centerHorizontal="true"
+        android:onClick="Quit"
+        android:text="@string/button_quit" />
+
+</RelativeLayout>

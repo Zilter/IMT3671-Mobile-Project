@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#33CCFF">
+    
+    <TextView
+        android:id="@+id/placement"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:textSize="20dp" />
+
+</LinearLayout>

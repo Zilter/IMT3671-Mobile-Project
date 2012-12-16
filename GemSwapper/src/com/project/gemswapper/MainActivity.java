@@ -2,8 +2,10 @@ package com.project.gemswapper;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,6 +40,23 @@ public class MainActivity extends Activity implements OnClickListener {
         highScoreButton.setOnClickListener(this);
         creditsButton.setOnClickListener(this);
         quitButton.setOnClickListener(this);
+        
+//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        SharedPreferences.Editor editor = preferences.edit();
+//        editor.putString("Name","Garlov");
+//        editor.commit();
+        
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String name = preferences.getString("Name","");
+        String id = preferences.getString("Id","");
+        
+        if(name.equalsIgnoreCase("") && id.equalsIgnoreCase(""))
+        {
+    		Intent GetUserIntent = new Intent(this, GetUser.class);
+    		startActivity(GetUserIntent);
+        }
+
+        //DatabaseHelper gemswapperDatabase = new DatabaseHelper(this);
     }
     
     public void onClick(View v)
