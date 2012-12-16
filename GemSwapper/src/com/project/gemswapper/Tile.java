@@ -81,8 +81,8 @@ public class Tile{
 		else		// make sure we don't access a broken object...
 		{
 			mRect = new Rect();
-			xPos = 0;
-			yPos = 0;
+			xPos = x;
+			yPos = y;
 			spriteHeight = 0;
 			spriteWidth = 0;
 			mType = 0;
@@ -93,6 +93,11 @@ public class Tile{
 	public int getType()
 	{
 		return mType;
+	}
+	
+	public void setType(int newType)
+	{
+		mType = newType;
 	}
 	
 	public int getXPos()

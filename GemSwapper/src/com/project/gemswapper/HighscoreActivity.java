@@ -46,6 +46,10 @@ public class HighscoreActivity extends ListActivity implements AsyncTaskComplete
         	asyncGetJSONFromURL async = new asyncGetJSONFromURL(this);
         	async.execute("http://game-details.com/gemswapper/highscore.php?");
         }
+        else
+        {
+        	// Alert the user? Open network config?
+        }
     }
     
     // When the async task has completed and the JSON result has been filled (hopefully)

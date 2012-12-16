@@ -488,24 +488,24 @@ public class GameView extends View {
 		
 		int sum = 0;
 		
-		System.out.print("TypeMatch: ");
-		System.out.print(typeMatch[0]);
-		System.out.print(", ");
-		System.out.print(typeMatch[1]);
-		System.out.print(", ");
-		System.out.print(typeMatch[2]);
-		System.out.print(", ");
-		System.out.print(typeMatch[3]);
-		System.out.print(", ");
-		System.out.print(typeMatch[4]);
-		System.out.print(", ");
-		System.out.print(typeMatch[5]);
-		System.out.print(", ");
-		System.out.print(typeMatch[6]);
-		System.out.print(", ");
-		System.out.print(typeMatch[7]);
-		System.out.print(", ");
-		System.out.println(typeMatch[8]);
+//		System.out.print("TypeMatch: ");
+//		System.out.print(typeMatch[0]);
+//		System.out.print(", ");
+//		System.out.print(typeMatch[1]);
+//		System.out.print(", ");
+//		System.out.print(typeMatch[2]);
+//		System.out.print(", ");
+//		System.out.print(typeMatch[3]);
+//		System.out.print(", ");
+//		System.out.print(typeMatch[4]);
+//		System.out.print(", ");
+//		System.out.print(typeMatch[5]);
+//		System.out.print(", ");
+//		System.out.print(typeMatch[6]);
+//		System.out.print(", ");
+//		System.out.print(typeMatch[7]);
+//		System.out.print(", ");
+//		System.out.println(typeMatch[8]);
 
 		
 		for(int i = 0; i < NUM_PATTERNS; ++i)
@@ -559,7 +559,53 @@ public class GameView extends View {
 	
 	private void clearOut(int pattern, int x, int y)
 	{
+		tiles[y + patterns[pattern][0]][x].setType(-1);	
+		tiles[y + patterns[pattern][1]][x].setType(-1);	// If the pattern bit is set, set the type to -1.
+		tiles[y - patterns[pattern][7]][x].setType(-1);	// if the bit isn't set, the center will be set to -1 instead,
+		tiles[y - patterns[pattern][8]][x].setType(-1);	// Which works for all patterns. 
 		
+		tiles[y][x + patterns[pattern][5]].setType(-1);
+		tiles[y][x + patterns[pattern][6]].setType(-1);
+		tiles[y][x - patterns[pattern][3]].setType(-1);
+		tiles[y][x - patterns[pattern][2]].setType(-1);
+		
+		tiles[y][x].setType(-1);
+		
+		// Checking from the bottom up for matches of type -1. 
+		for(int i = GRIDSIZE - 1; i >= 0; --i)
+		{
+			for(int j = 0; j < GRIDSIZE; ++j)
+			{
+				if(tiles[i][j].getType() == -1)
+				{
+					int tempY = i;
+					int verticalCount = 0;
+					
+					while(tempY > 0 && tiles[tempY - 1][j].getType() == -1)
+					{
+						--tempY;
+						++verticalCount;
+					}
+					
+					if(tempY == 0)
+					{
+						// create verticalCount new tiles...
+						for(int v = verticalCount - 1; v >= 0; --v)
+						{
+							tiles[v][j] = new Tile(mContext, 5, 10, randomGen.nextInt(5));
+						}
+					}
+					else
+					{	
+						// swap with the one above..
+						Tile start = tiles[tempY][j];
+						Tile temp = tiles[tempY - 1][j];
+						tiles[tempY - 1][j] = start;
+						start = temp;
+					}
+				}
+			}
+		}
 	}
 	
 	private void playSound(int type)

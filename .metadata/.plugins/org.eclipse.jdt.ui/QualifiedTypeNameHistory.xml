@@ -9,4 +9,5 @@
 <fullyQualifiedTypeName name="com.project.gemswapper.Tile.TileType"/>
 <fullyQualifiedTypeName name="com.project.gemswapper.R.id"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
 </qualifiedTypeNameHistroy>
