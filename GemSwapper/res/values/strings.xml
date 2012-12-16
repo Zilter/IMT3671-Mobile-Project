@@ -83,5 +83,9 @@
     <string name="button_quit">Quit</string>
     <string name="button_submit">Submit and Restart</string>
     <string name="hello_world">Hello world!</string>
+    
+	<!--     Activity - Main Game  -->
+	<string name="game_score">Score</string>
+	<string name="game_time">Time Remaining</string>
 
 </resources>

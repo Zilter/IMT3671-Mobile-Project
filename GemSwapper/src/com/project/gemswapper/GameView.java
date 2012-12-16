@@ -1,6 +1,8 @@
 package com.project.gemswapper;
 
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,6 +26,10 @@ public class GameView extends View {
 	
 	private final int GRIDSIZE = 8;
 	private final int NUM_PATTERNS = 32;
+	private int timeTreshold;
+	private int elapsedTime;
+	private long currentTime; 
+	private long startTime;
 	
 	Paint paint;
 	Resources res;
@@ -71,6 +78,9 @@ public class GameView extends View {
 		patternTypes = new int[7][2];		// [i][0] = The counter for how many of this type solved this round.
 											// [i][1] = The score given for the pattern type. 
 		
+		timeTreshold = 5;
+		startTime = SystemClock.uptimeMillis();
+		
 		fillPatterns();
 		mContext = context;
 		res = this.getResources();
@@ -101,8 +111,29 @@ public class GameView extends View {
 		sFailure = sounds.load(mContext, R.raw.failure, 1);
 		sSuccess = sounds.load(mContext, R.raw.success, 1);
 		
-		
 		fillGrid();
+		
+		Timer timer = new Timer();
+		
+		TimerTask task = new TimerTask(){
+			
+			@Override
+			public void run()
+			{
+				currentTime = SystemClock.uptimeMillis();
+				elapsedTime = (int) ((currentTime - startTime) / 1000);
+				
+				postInvalidate();
+				
+				if(elapsedTime >= timeTreshold)
+				{
+					endGame();
+				}
+				
+			}
+		};
+		
+		timer.schedule(task, 0, 500);
 	}
 	
 	// Patterns are defined as [Above, Above, Left, Left, CENTER, Right, Right, Down, Down, SUMNEEDED, PATTERNTYPE] with 1's and 0's 
@@ -274,17 +305,13 @@ public class GameView extends View {
 //			System.out.print(", ");
 //			System.out.println(endY);
 			
-			Tile temp;
 			boolean failure = false;
 			
 			if(startX != endX || startY != endY)
 			{	
 				if(endX > startX)	// drag right.
 				{
-					temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY][startX + 1].getType());
-					tiles[startY][startX + 1] = new Tile(mContext, tiles[startY][startX + 1].getXPos(), tiles[startY][startX + 1].getYPos(), tiles[startY][startX].getType());
-					tiles[startY][startX] = temp;
-					
+					swapTile(startX, startY, 1, 0);
 					if(checkMatch(startY, startX + 1, tiles[startY][startX + 1].getType()))
 					{
 						failure = false;
@@ -304,18 +331,14 @@ public class GameView extends View {
 					}
 					else
 					{
-						temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY][startX + 1].getType());
-						tiles[startY][startX + 1] = new Tile(mContext, tiles[startY][startX + 1].getXPos(), tiles[startY][startX + 1].getYPos(), tiles[startY][startX].getType());
-						tiles[startY][startX] = temp;
+						swapTile(startX, startY, 1, 0);
 						playSound(sFailure);
 					}
 				}
 				else if(endX < startX) // drag left
 				{
-					temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY][startX - 1].getType());
-					tiles[startY][startX - 1] = new Tile(mContext, tiles[startY][startX - 1].getXPos(), tiles[startY][startX - 1].getYPos(), tiles[startY][startX].getType());
-					tiles[startY][startX] = temp;
 					
+					swapTile(startX, startY, -1, 0);
 					if(checkMatch(startY, startX - 1, tiles[startY][startX - 1].getType()))
 					{
 						failure = false;
@@ -335,17 +358,13 @@ public class GameView extends View {
 					}
 					else
 					{
-						temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY][startX - 1].getType());
-						tiles[startY][startX - 1] = new Tile(mContext, tiles[startY][startX - 1].getXPos(), tiles[startY][startX - 1].getYPos(), tiles[startY][startX].getType());
-						tiles[startY][startX] = temp;
+						swapTile(startX, startY, -1, 0);
 						playSound(sFailure);
 					}		
 				}
 				else if(endY > startY) // drag down.
 				{
-					temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY + 1][startX].getType());
-					tiles[startY + 1][startX] = new Tile(mContext, tiles[startY + 1][startX].getXPos(), tiles[startY + 1][startX].getYPos(), tiles[startY][startX].getType());
-					tiles[startY][startX] = temp;
+					swapTile(startX, startY, 0, 1);
 					
 					if(checkMatch(startY + 1, startX, tiles[startY + 1][startX].getType()))
 					{
@@ -366,17 +385,13 @@ public class GameView extends View {
 					}
 					else
 					{
-						temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY + 1][startX].getType());
-						tiles[startY + 1][startX] = new Tile(mContext, tiles[startY + 1][startX].getXPos(), tiles[startY + 1][startX].getYPos(), tiles[startY][startX].getType());
-						tiles[startY][startX] = temp;
+						swapTile(startX, startY, 0, 1);
 						playSound(sFailure);
 					}
 				}
 				else if(endY < startY) // drag up
 				{
-					temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY - 1][startX].getType());
-					tiles[startY - 1][startX] = new Tile(mContext, tiles[startY - 1][startX].getXPos(), tiles[startY - 1][startX].getYPos(), tiles[startY][startX].getType());
-					tiles[startY][startX] = temp;
+					swapTile(startX, startY, 0, -1);
 					
 					if(checkMatch(startY - 1, startX, tiles[startY - 1][startX].getType()))
 					{
@@ -397,9 +412,7 @@ public class GameView extends View {
 					}
 					else
 					{
-						temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY - 1][startX].getType());
-						tiles[startY - 1][startX] = new Tile(mContext, tiles[startY - 1][startX].getXPos(), tiles[startY - 1][startX].getYPos(), tiles[startY][startX].getType());
-						tiles[startY][startX] = temp;
+						swapTile(startX, startY, 0, -1);
 						playSound(sFailure);
 					}
 				}
@@ -408,6 +421,13 @@ public class GameView extends View {
 			this.invalidate();		// Force redraw. 
 		}
 		return true;
+	}
+	
+	private void swapTile(int startX, int startY, int x, int y)
+	{
+		Tile temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY + y][startX + x].getType());
+		tiles[startY + y][startX + x] = new Tile(mContext, tiles[startY + y][startX + x].getXPos(), tiles[startY + y][startX + x].getYPos(), tiles[startY][startX].getType());
+		tiles[startY][startX] = temp;
 	}
 	
 	@Override
@@ -427,7 +447,8 @@ public class GameView extends View {
 		canvas.drawBitmap(background, 0, 0, paint);
 		canvas.drawBitmap(grid, 0, gridOffset, paint);
 		
-		canvas.drawText("Score: " + String.valueOf(mScore), 10, 50, paint); // Draw score.
+		canvas.drawText(mContext.getString(R.string.game_time) + ": " + String.valueOf(timeTreshold - elapsedTime), 10, 100, paint);
+		canvas.drawText(mContext.getString(R.string.game_score) + ": " + String.valueOf(mScore), 10, 50, paint); // Draw score.
 		
 		for(int i = 0; i < GRIDSIZE; ++i)
 		{
@@ -449,6 +470,7 @@ public class GameView extends View {
 //		System.out.print(", ");
 //		System.out.println(type);
 		
+		// Fills the typematch array with matches..
 		if(x > 0 && tiles[y][x - 1].getType() == type)
 		{
 			typeMatch[3] = 1;
@@ -513,6 +535,7 @@ public class GameView extends View {
 		
 		for(int i = 0; i < NUM_PATTERNS; ++i)
 		{
+			// Take the sum of the ANDing of the pattern and the current match.
 			sum = typeMatch[0] * patterns[i][0] +
 				  typeMatch[1] * patterns[i][1] +
 				  typeMatch[2] * patterns[i][2] +
@@ -545,14 +568,13 @@ public class GameView extends View {
 //			System.out.println(patterns[i][8]);
 			
 			
-			if(sum >= patterns[i][9])
+			if(sum >= patterns[i][9])		// If we have a pattern. 
 			{
-				// Increment pattern counter + score.
 				int patternType = patterns[i][10];
-				patternTypes[patternType][0]++;
-				mScore += patternTypes[patternType][1];
+				patternTypes[patternType][0]++; 		// Increments the counter for this patternType. 
+				mScore += patternTypes[patternType][1];	// Adds to the score. 
 				
-				clearOut(i, x, y);
+				clearOut(i, x, y);			// Moves everything above, down, and fills in new tiles in the empty positions. 
 				return true;
 			}
 		}
@@ -618,6 +640,8 @@ public class GameView extends View {
 	
 	private void endGame()
 	{
+		// cancel the timer.. timer.cancel();
+		
 		Context context = getContext();
 		Intent intent = new Intent(context, EndgameActivity.class);
 		

@@ -133,6 +133,10 @@ public final class R {
         public static final int fiveDescription=0x7f050022;
         public static final int four=0x7f05001f;
         public static final int fourDescription=0x7f050020;
+        /**      Activity - Main Game  
+         */
+        public static final int game_score=0x7f050040;
+        public static final int game_time=0x7f050041;
         /**  Activity - Get User 
          */
         public static final int getName=0x7f050037;
