@@ -40,6 +40,7 @@ public class GameView extends View {
 	Random randomGen;
 	
 	float mScale;
+	float tileScale;
 	int mScore;
 	
 	int gridOffset;
@@ -78,7 +79,7 @@ public class GameView extends View {
 		patternTypes = new int[7][2];		// [i][0] = The counter for how many of this type solved this round.
 											// [i][1] = The score given for the pattern type. 
 		
-		timeTreshold = 5;
+		timeTreshold = 50;
 		startTime = SystemClock.uptimeMillis();
 		
 		fillPatterns();
@@ -111,13 +112,16 @@ public class GameView extends View {
 		sFailure = sounds.load(mContext, R.raw.failure, 1);
 		sSuccess = sounds.load(mContext, R.raw.success, 1);
 		
+
+		tileScale = ( 90 - ( mScale * 90 ) ) / 2;
+		
 		fillGrid();
 		
 		Timer timer = new Timer();
 		
-		TimerTask task = new TimerTask(){
-			
-			@Override
+		TimerTask task = new TimerTask(){	// The timer runs every 500 ms and updates the elapsed time. 
+											// In doing so it also invalidates the screen so the time remaining
+			@Override						// is appropriately rendered. 
 			public void run()
 			{
 				currentTime = SystemClock.uptimeMillis();
@@ -242,7 +246,6 @@ public class GameView extends View {
 					}
 					
 				}while(!goodType);
-				float tileScale = ( 90 - ( mScale * 90 ) ) / 2;
 				tiles[y][x] = new Tile(mContext, x * 90 + (int)tileScale , y * 90 + (int)(tileScale + gridOffset), typeTemp);
 			}
 		}
@@ -604,7 +607,7 @@ public class GameView extends View {
 				if(tiles[i][j].getType() == -1)
 				{
 					int tempY = i;
-					int verticalCount = 0;
+					int verticalCount = 1;
 					
 					while(tempY > 0 && tiles[tempY - 1][j].getType() == -1)
 					{
@@ -617,16 +620,14 @@ public class GameView extends View {
 						// create verticalCount new tiles...
 						for(int v = verticalCount - 1; v >= 0; --v)
 						{
-							tiles[v][j] = new Tile(mContext, 5, 10, randomGen.nextInt(5));
+							tiles[v][j] = new Tile(mContext, j * 90 + (int)tileScale , v * 90 + (int)(tileScale + gridOffset), randomGen.nextInt(5));
+							checkMatch(v, j, tiles[v][j].getType());
 						}
 					}
 					else
 					{	
-						// swap with the one above..
-						Tile start = tiles[tempY][j];
-						Tile temp = tiles[tempY - 1][j];
-						tiles[tempY - 1][j] = start;
-						start = temp;
+						swapTile(j, i, 0, -verticalCount); // Swap down the one above (above all the matches). 
+						checkMatch(i, j, tiles[i][j].getType());
 					}
 				}
 			}

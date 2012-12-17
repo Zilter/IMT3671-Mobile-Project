@@ -59,6 +59,10 @@ public class Tile{
 		{
 			mSprite = BitmapFactory.decodeResource(res, R.drawable.star_tile_01);
 		}
+		else if(type == -1)
+		{
+			mSprite = BitmapFactory.decodeResource(res, R.drawable.star_tile_01);
+		}
 		else
 		{
 			System.out.print("Wrong tileType specified: ");
