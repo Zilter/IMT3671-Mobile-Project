@@ -58,13 +58,24 @@ public class GameView extends View {
 	private int patterns[][];
 	private int patternTypes[][];
 	
-	private final int FIVE_T_SCORE = 3873;
-	private final int FOUR_T_SCORE = 1761;
-	private final int FIVE_ROW_SCORE = 1123;
-	private final int THREE_T_SCORE  = 725;
-	private final int CORNER_SCORE = 725;
-	private final int FOUR_ROW_SCORE = 475;
-	private final int THREE_ROW_SCORE = 379;
+	//score values as calculated by this formula: 
+	//123 * number of gems combined * difficulty constant
+	//The difficulty constants are (from top to bottom):
+	//	12
+	//	6
+	//	2.5
+	//	3
+	//	3
+	//	1.5
+	//	1
+	
+	private final int FIVE_T_SCORE = 10332;
+	private final int FOUR_T_SCORE = 4428;
+	private final int FIVE_ROW_SCORE = 1537;
+	private final int THREE_T_SCORE  = 1845;
+	private final int CORNER_SCORE = 1845;
+	private final int FOUR_ROW_SCORE = 738;
+	private final int THREE_ROW_SCORE = 369;
 	
 	private boolean dragStarted;
 	
