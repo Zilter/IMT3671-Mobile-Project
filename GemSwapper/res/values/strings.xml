@@ -80,7 +80,7 @@
     <string name="errorBack">You must choose a username first! </string>
 
     <!-- Activity - End Game -->
-    <string name="highscore_main">Your score was:\t\t</string>
+    <string name="highscore_main">YOUR SCORE:\t\t</string>
     <string name="button_quit">QUIT</string>
     <string name="button_submit">PLAY AGAIN</string>
     
