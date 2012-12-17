@@ -3,33 +3,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/highscore_main"
-        style="@style/MenuFont"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center" />
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/imageDescription"
+        android:src="@drawable/background" />
 
-    <TextView
-        android:id="@+id/highscore_score"
-        style="@style/MenuFont"
-        android:layout_width="wrap_content"
-        android:layout_below="@id/highscore_main" />
-
-    <Button
-        android:id="@+id/button_submit"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:onClick="Submit"
-        android:text="@string/button_submit" />
+        android:layout_centerVertical="true"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/button_quit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button_submit"
-        android:layout_centerHorizontal="true"
-        android:onClick="Quit"
-        android:text="@string/button_quit" />
+        <TextView
+            android:id="@+id/highscore_main"
+            style="@style/MenuFont"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/highscore_score"
+            style="@style/MenuFont"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center" />
+
+        <Button
+            android:id="@+id/button_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="Submit"
+            android:text="@string/button_submit" />
+
+        <Button
+            android:id="@+id/button_quit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="Quit"
+            android:text="@string/button_quit" />
+    </LinearLayout>
 
 </RelativeLayout>
