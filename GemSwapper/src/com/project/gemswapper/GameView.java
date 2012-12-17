@@ -39,39 +39,40 @@ public class GameView extends View {
 	Tile tiles[][];
 	Random randomGen;
 	
-	float mScale;
-	float tileScale;
-	int mScore;
+	private float mScale;
+	private float tileScale;
+	private int mScore;
 	
-	int gridOffset;
-	int tileSize;
+	private int gridOffset;
+	private int gridOffsetMotionEvent;
+	private int tileSize;
 	
-	float mViewWidth;
-	float mViewHeight;
+	private float mViewWidth;
+	private float mViewHeight;
 	
-	int startX;
-	int startY;
-	int endX;
-	int endY;
+	private int startX;
+	private int startY;
+	private int endX;
+	private int endY;
 	
-	int patterns[][];
-	int patternTypes[][];
+	private int patterns[][];
+	private int patternTypes[][];
 	
-	private final int FIVE_T_SCORE = 1000;
-	private final int FOUR_T_SCORE = 800;
-	private final int FIVE_ROW_SCORE = 700;
-	private final int THREE_T_SCORE  = 600;
-	private final int CORNER_SCORE = 500;
-	private final int FOUR_ROW_SCORE = 400;
-	private final int THREE_ROW_SCORE = 300;
+	private final int FIVE_T_SCORE = 3873;
+	private final int FOUR_T_SCORE = 1761;
+	private final int FIVE_ROW_SCORE = 1123;
+	private final int THREE_T_SCORE  = 725;
+	private final int CORNER_SCORE = 725;
+	private final int FOUR_ROW_SCORE = 475;
+	private final int THREE_ROW_SCORE = 379;
 	
-	boolean dragStarted;
+	private boolean dragStarted;
 	
-	private Timer timer;
+	public Timer timer;
 	
 	SoundPool sounds;
-	int sFailure;
-	int sSuccess;
+	private int sFailure;
+	private int sSuccess;
 	
 	public GameView(Context context) {
 		super(context);
@@ -98,9 +99,13 @@ public class GameView extends View {
 		mViewHeight = metrics.heightPixels;
 		mScale = mViewWidth / 720;
 		
-		gridOffset = (int)(mViewHeight - mViewWidth);
+		gridOffset = (int)(mViewHeight/(mScale) - mViewWidth/(mScale));
 		tileSize = (int) (mViewWidth / 8);
 		
+		gridOffsetMotionEvent = (int)(mViewHeight - mViewWidth);
+		
+		System.out.println(gridOffset);
+		System.out.println(mViewHeight);
 		System.out.println(mViewWidth);
 		dragStarted = false;
 		
@@ -270,14 +275,16 @@ public class GameView extends View {
 				int x = (int) event.getX();
 				int y = (int) event.getY();
 				
-				if(y > gridOffset)
+				System.out.println(gridOffsetMotionEvent);
+				
+				if(y > gridOffsetMotionEvent)
 				{
 					startX = x / tileSize;
-					startY = (y - gridOffset) / tileSize;
+					startY = (y - gridOffsetMotionEvent) / tileSize;
 					
-//					System.out.print(startY);
-//					System.out.print(", ");
-//					System.out.println(startX);
+					System.out.print(startY);
+					System.out.print(", ");
+					System.out.println(startX);
 					
 					dragStarted = true;
 				}
@@ -287,10 +294,10 @@ public class GameView extends View {
 				int x = (int) event.getX();
 				int y = (int) event.getY();
 				
-				if(y > gridOffset)
+				if(y > gridOffsetMotionEvent)
 				{
 					endX = x / tileSize;
-					endY = (y - gridOffset) / tileSize;
+					endY = (y - gridOffsetMotionEvent) / tileSize;
 					
 //					System.out.print("End: ");
 //					System.out.print(endY);
@@ -450,6 +457,7 @@ public class GameView extends View {
 		paint.setTextSize(50);
 		
 		canvas.scale(mScale, mScale);
+
 		canvas.drawBitmap(background, 0, 0, paint);
 		canvas.drawBitmap(grid, 0, gridOffset, paint);
 		
@@ -590,10 +598,10 @@ public class GameView extends View {
 	
 	private void clearOut(int pattern, int x, int y)
 	{
-		tiles[y + patterns[pattern][0]][x].setType(-1);	
-		tiles[y + patterns[pattern][1]][x].setType(-1);	// If the pattern bit is set, set the type to -1.
-		tiles[y - patterns[pattern][7]][x].setType(-1);	// if the bit isn't set, the center will be set to -1 instead,
-		tiles[y - patterns[pattern][8]][x].setType(-1);	// Which works for all patterns. 
+		tiles[y - patterns[pattern][0]][x].setType(-1);	
+		tiles[y - patterns[pattern][1]][x].setType(-1);	// If the pattern bit is set, set the type to -1.
+		tiles[y + patterns[pattern][7]][x].setType(-1);	// if the bit isn't set, the center will be set to -1 instead,
+		tiles[y + patterns[pattern][8]][x].setType(-1);	// Which works for all patterns. 
 		
 		tiles[y][x + patterns[pattern][5]].setType(-1);
 		tiles[y][x + patterns[pattern][6]].setType(-1);

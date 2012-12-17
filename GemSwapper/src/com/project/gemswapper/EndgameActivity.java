@@ -29,19 +29,14 @@ public class EndgameActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-    	System.out.println("Endgame has started");
     	requestWindowFeature(Window.FEATURE_NO_TITLE); //hide title bar
     	getWindow().setFlags(0xFFFFFFFF, LayoutParams.FLAG_FULLSCREEN | LayoutParams.FLAG_KEEP_SCREEN_ON);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_endgame);
         
-        
-        typeface = Typeface.createFromAsset(getAssets(), "IMPACT.TTF");
+        typeface = Typeface.createFromAsset(getAssets(), "YellowMagician.ttf");
         finishedGame = getIntent();
-        Log.i("derp", finishedGame.getStringExtra(GameView.SCORE));
         scoreString = finishedGame.getStringExtra(GameView.SCORE);
-        
-        
         
         TextView highscore_main = (TextView) findViewById(R.id.highscore_main);
         TextView highscore_score = (TextView) findViewById(R.id.highscore_score);
@@ -51,8 +46,6 @@ public class EndgameActivity extends Activity {
         
         highscore_main.setText(R.string.highscore_main);
         highscore_score.setText(scoreString);
-        
-        System.out.println("Endgame has ended");
     }
 
  // Does the networking in a background thread. 
@@ -96,6 +89,8 @@ public class EndgameActivity extends Activity {
      	coreUrl = "http://game-details.com/gemswapper/insertachievements.php?";
         urlToSend = coreUrl + "id=" + id + "&" + "name=" + name + "&" + "achievements=" + achievementPoints;
      	
+        System.out.println(urlToSend);
+        
      	HttpGet getAchievement = new HttpGet(urlToSend);
      	
      	try 
@@ -135,6 +130,7 @@ public class EndgameActivity extends Activity {
  	
  	public void Quit(View view)
  	{
+ 		updateDB();
  		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
  		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
  		startActivity(intent);
@@ -178,6 +174,7 @@ public class EndgameActivity extends Activity {
  		}
  		achievementPoints = Integer.toString(pointsTemp);
  		
+ 		mDbHelper.close();
  	}
  	
 }

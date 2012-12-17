@@ -2,85 +2,84 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
-    
-<!--     <ImageView -->
-<!--         android:id="@+id/main_menu" -->
-<!--         android:contentDescription="@string/imageDescription" -->
-<!--         android:src="@drawable/ic_launcher.png" -->
-<!--         android:layout_height="wrap_content" -->
-<!--         android:layout_width="wrap_content" -->
-<!--         android:layout_alignParentRight="true" -->
-<!--         android:layout_centerVertical="true" -->
-<!--         android:layout_marginRight="25dp"  -->
-<!--     /> -->
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/menu_bg"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:contentDescription="@string/imageDescription"
+        android:src="@drawable/background" />
+    
+     <TextView
+            android:id="@+id/main_menu_title"
+            style="@style/MenuFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:text="@string/start_game" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:orientation="vertical" >
-        
-     	<ImageButton 
-     	    android:id="@+id/start_game_button"
-     	    android:background="@drawable/start_game_01"
-     	    android:layout_height="wrap_content"
-     	    android:layout_width="wrap_content"
-     	    android:layout_gravity="center"
-     	    android:layout_marginTop="3dp"
-     	    android:contentDescription="@string/imageDescription"
-     	    />
-     	
-     	<ImageButton 
-     	    android:id="@+id/howToPlay_button"
-     	    android:background="@drawable/how_to_play_01"
-     	    android:layout_height="wrap_content"
-     	    android:layout_width="wrap_content"
-     	    android:layout_gravity="center"
-     	    android:layout_marginTop="3dp"
-     	    android:contentDescription="@string/imageDescription"
-     	    />
-     	     	
-     	<ImageButton 
-     	    android:id="@+id/achievements_button"
-     	    android:background="@drawable/achievements_01"
-     	    android:layout_height="wrap_content"
-     	    android:layout_width="wrap_content"
-     	    android:layout_gravity="center"
-     	    android:layout_marginTop="3dp"
-     	    android:contentDescription="@string/imageDescription"
-     	    />
-     	     	     	
-     	<ImageButton 
-     	    android:id="@+id/high_score_button"
-     	    android:background="@drawable/high_score_01"
-     	    android:layout_height="wrap_content"
-     	    android:layout_width="wrap_content"
-     	    android:layout_gravity="center"
-     	    android:layout_marginTop="3dp"
-     	    android:contentDescription="@string/imageDescription"
-     	    />
-     	     	     	     	
-     	<ImageButton 
-     	    android:id="@+id/credits_button"
-     	    android:background="@drawable/credits_01"
-     	    android:layout_height="wrap_content"
-     	    android:layout_width="wrap_content"
-     	    android:layout_gravity="center"
-     	    android:layout_marginTop="3dp"
-     	    android:contentDescription="@string/imageDescription"
-     	    />
-     	     	     	     	     	
-     	<ImageButton 
-     	    android:id="@+id/quit_game_button"
-     	    android:background="@drawable/quit_game_01"
-     	    android:layout_height="wrap_content"
-     	    android:layout_width="wrap_content"
-     	    android:layout_gravity="center"
-     	    android:layout_marginTop="3dp"
-     	    android:layout_marginBottom="3dp"
-     	    android:contentDescription="@string/imageDescription"
-     	    />
-     	
- 
+
+        <ImageButton
+            android:id="@+id/start_game_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/start_game_01"
+            android:contentDescription="@string/imageDescription" />
+
+        <ImageButton
+            android:id="@+id/howToPlay_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/how_to_play_01"
+            android:contentDescription="@string/imageDescription" />
+
+        <ImageButton
+            android:id="@+id/achievements_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/achievements_01"
+            android:contentDescription="@string/imageDescription" />
+
+        <ImageButton
+            android:id="@+id/high_score_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/high_score_01"
+            android:contentDescription="@string/imageDescription" />
+
+        <ImageButton
+            android:id="@+id/credits_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/credits_01"
+            android:contentDescription="@string/imageDescription" />
+
+        <ImageButton
+            android:id="@+id/quit_game_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/quit_game_01"
+            android:contentDescription="@string/imageDescription" />
     </LinearLayout>
 
 </RelativeLayout>

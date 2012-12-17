@@ -20,7 +20,7 @@ public class CreditsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_credits);
 		
-		typeface = Typeface.createFromAsset(getAssets(), "IMPACT.TTF");
+		typeface = Typeface.createFromAsset(getAssets(), "YellowMagician.ttf");
 		
 		TextView creditsMain = (TextView) findViewById(R.id.creditsMain);
 		TextView creators = (TextView) findViewById(R.id.creators);

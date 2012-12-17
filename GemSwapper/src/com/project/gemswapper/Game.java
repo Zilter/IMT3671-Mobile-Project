@@ -1,6 +1,7 @@
 package com.project.gemswapper;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.Window;
@@ -25,5 +26,28 @@ public class Game extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_game, menu);
         return true;
+    }
+    
+	@Override
+    public void onBackPressed()
+    {
+		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		mGameView.timer.cancel();
+		startActivity(intent);
+    }
+	
+	@Override
+    public void onPause()
+    {
+		super.onPause();
+		mGameView.timer.cancel();
+    }
+	
+	@Override
+    public void onStop()
+    {
+		super.onStop();
+		mGameView.timer.cancel();
     }
 }

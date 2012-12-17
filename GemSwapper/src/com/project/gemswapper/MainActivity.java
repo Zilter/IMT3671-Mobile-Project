@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class MainActivity extends Activity implements OnClickListener {
 	
@@ -25,7 +26,12 @@ public class MainActivity extends Activity implements OnClickListener {
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        typeface = Typeface.createFromAsset(getAssets(), "IMPACT.TTF");
+        typeface = Typeface.createFromAsset(getAssets(), "YellowMagician.ttf");
+        
+        TextView mainMenuTitle = (TextView) findViewById(R.id.main_menu_title);
+        
+        mainMenuTitle.setTypeface(typeface);
+        mainMenuTitle.setText(R.string.title_activity_main);
         
         ImageButton startGameButton = (ImageButton) findViewById(R.id.start_game_button);
         ImageButton howToPlayButton = (ImageButton) findViewById(R.id.howToPlay_button);
@@ -94,14 +100,15 @@ public class MainActivity extends Activity implements OnClickListener {
     	}
     }
 
-    
-    
-    
-    
-    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
+    }
+    
+	@Override
+    public void onBackPressed()
+    {
+		finish();
     }
 }

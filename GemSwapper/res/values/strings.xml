@@ -5,7 +5,7 @@
     <string name="menu_settings">Settings</string>
 
     <!-- activities -->
-    <string name="title_activity_main">Gemswapper</string>
+    <string name="title_activity_main">GEMSWAPPER</string>
     <string name="title_activity_highscore">Highscore</string>
     <string name="title_activity_credits">Credits</string>
     <string name="title_activity_game">Game</string>
@@ -61,9 +61,9 @@
     
 
     <!-- Activity - Credits -->
-    <string name="creditsMain">Credits</string>
-    <string name="creators">This game was created by Christian Stokkebekk, Christian Holt and
-        Øyvind Nordli for an assignment in Mobile Systems Programming at Gjøvik University College (GUC)</string>
+    <string name="creditsMain">CREDITS</string>
+    <string name="creators">THIS GAME WAS CREATED BY CHRISTIAN HOLT, CHRISTIAN STOKKEBEKK OG OEYVIND NORDLI IN 
+        AFFILIATION WITH GJOEVIK UNIVERSITY COLLEGE(GUC). FONT BY ERICO LEBEDENCO</string>
 
     <!-- Activity - High Score -->
     <string name="highScoreMain">High Score</string>
@@ -80,9 +80,8 @@
 
     <!-- Activity - End Game -->
     <string name="highscore_main">Your score was:\t\t</string>
-    <string name="button_quit">Quit</string>
-    <string name="button_submit">Submit and Restart</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="button_quit">QUIT</string>
+    <string name="button_submit">PLAY AGAIN</string>
     
 	<!--     Activity - Main Game  -->
 	<string name="game_score">Score</string>
