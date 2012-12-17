@@ -81,8 +81,10 @@ public class EndgameActivity extends Activity {
 	        SharedPreferences.Editor editor = preferences.edit();
 	        editor.putInt("Score",currentScore);
 	        editor.commit();
-	        urlToSend = coreUrl + "id=" + id + "&" + "name=" + name + "&" + "score=" + scoreString;
         }
+        formerScore = preferences.getInt("Score",0);
+	    urlToSend = coreUrl + "id=" + id + "&" + "name=" + name + "&" + "score=" + formerScore;
+        
         
      	HttpGet getScore = new HttpGet(urlToSend);
      	
@@ -131,6 +133,12 @@ public class EndgameActivity extends Activity {
  	public void Quit(View view)
  	{
  		updateDB();
+ 		
+ 		if(isOnline())
+ 		{
+ 			new DataSend().execute();
+ 		}
+ 		
  		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
  		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
  		startActivity(intent);
