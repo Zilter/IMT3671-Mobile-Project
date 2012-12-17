@@ -50,7 +50,7 @@ public class MainActivity extends Activity implements OnClickListener {
         String name = preferences.getString("Name","");
         String id = preferences.getString("Id","");
         
-        if(name.equalsIgnoreCase("") && id.equalsIgnoreCase(""))
+        if(name.equalsIgnoreCase("") || id.equalsIgnoreCase(""))
         {
     		Intent GetUserIntent = new Intent(this, GetUser.class);
     		startActivity(GetUserIntent);

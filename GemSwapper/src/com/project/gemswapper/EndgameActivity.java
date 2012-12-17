@@ -81,23 +81,20 @@ public class EndgameActivity extends Activity {
         int formerScore = preferences.getInt("Score",0);
         int currentScore = Integer.parseInt(scoreString);
         
+     	coreUrl = "http://game-details.com/gemswapper/insertscore.php?";   
+     	
         if(currentScore > formerScore)
         {
 	        SharedPreferences.Editor editor = preferences.edit();
 	        editor.putInt("Score",currentScore);
 	        editor.commit();
-	        
-	        urlToSend = coreUrl + "id=" + id + "&" + "name=" + name + "&" + "score" + scoreString;
+	        urlToSend = coreUrl + "id=" + id + "&" + "name=" + name + "&" + "score=" + scoreString;
         }
         
-     	coreUrl = "http://game-details.com/gemswapper/insertscore.php?";
-        
-     	
-//     	System.out.println(urlToSend);
      	HttpGet getScore = new HttpGet(urlToSend);
      	
      	coreUrl = "http://game-details.com/gemswapper/insertachievements.php?";
-        urlToSend = coreUrl + "id=" + id + "&" + "name=" + name + "&" + "achievements" + achievementPoints;
+        urlToSend = coreUrl + "id=" + id + "&" + "name=" + name + "&" + "achievements=" + achievementPoints;
      	
      	HttpGet getAchievement = new HttpGet(urlToSend);
      	

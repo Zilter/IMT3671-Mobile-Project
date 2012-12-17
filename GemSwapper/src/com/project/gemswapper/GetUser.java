@@ -114,7 +114,6 @@ public class GetUser extends Activity implements AsyncTaskCompleteListener<JSONO
 				JSONObject e = highscores.getJSONObject(i);
 				
 				String id = e.getString("max(id)");
-				
 				SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		        SharedPreferences.Editor editor = preferences.edit();
 		        editor.putString("Id",id);
