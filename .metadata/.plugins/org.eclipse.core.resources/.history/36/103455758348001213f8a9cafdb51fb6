@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GemSwapper</string>
+    <string name="menu_settings">Settings</string>
+
+    <!-- activities -->
+    <string name="title_activity_main">GEMSWAPPER</string>
+    <string name="title_activity_highscore">Highscore</string>
+    <string name="title_activity_credits">Credits</string>
+    <string name="title_activity_game">Game</string>
+    <string name="title_activity_achievements">Achievements</string>
+    <string name="title_activity_how_to">HowTo</string>
+    <string name="title_activity_database">Database</string>
+    <string name="title_activity_high_score_score">HighScore - Score</string>
+    <string name="title_activity_high_score_achievements">HighScore - Achievements</string>
+    <string name="title_activity_get_user">GetUser</string>
+    <string name="title_activity_endgame">Endgame</string>
+
+    <!-- Main Menu & Menu Buttons -->
+    <string name="start_game">Start Game</string>
+    <string name="how_to_play">How to Play</string>
+    <string name="achievements">Achievements</string>
+    <string name="high_score">High Scores</string>
+    <string name="credits">Credits</string>
+    <string name="quit_game">Quit Game</string>
+    <string name="imageDescription">This is an image</string>
+
+    <!-- Activity - How To Play -->
+    <string name="howToPlayGame1">Score points by combining three or more of the same gem in a straight line</string>
+    <string name="howToPlayGame2">Drag a gem towards a neighbouring gem to swap their places</string>
+    <string name="howToPlayGame3">The goal of the game is to score as many points as you can before the time runs out.</string>
+    <string name="howToImage1">Three in a row</string>
+    <string name="howToImage2">Four in a row</string>
+    <string name="howToImage3">Five in a row</string>
+    <string name="howToImage4">A corner shape</string>
+    <string name="howToImage5">A T-shape</string>
+    <string name="imageInfo">An image describing how to play the game</string>
+
+    <!-- Achievements -->
+    <string name="three">Lines of Three</string>
+    <string name="threeDescription">Match three gems</string>
+    <string name="four">Lines of Four</string>
+    <string name="fourDescription">Match four gems</string>
+    <string name="five">Lines of Five</string>
+    <string name="fiveDescription">Match five gems in a straight line</string>
+    <string name="corner">Corner Shapes</string>
+    <string name="cornerDescription">Match gems in a corner shape</string>
+    <string name="tShape">T-Shapes</string>
+    <string name="tShapeDescription">Match gems in a T-shape</string>
+    <string name="score">Score</string>
+    <string name="scoreDescription">Get as many points as you can in one game</string>
+    <string name="no_achievements">Something has gone terribly wrong, there are noe achievements here!</string>
+    <string name="text2desc">Times Completed:</string>
+    <string name="progress">Progress:</string>
+    <string name="slash">/</string>
+    <string name="reward">Reward:</string>
+    <string name="points">Points</string>
+    <string name="text6desc">How to obtain:</string>
+    <string name="imageInfoStar">Achievement icon</string>
+    
+
+    <!-- Activity - Credits -->
+    <string name="creditsMain">CREDITS</string>
+    <string name="creators">THIS GAME WAS CREATED BY CHRISTIAN HOLT, CHRISTIAN STOKKEBEKK OG OEYVIND NORDLI IN 
+        AFFILIATION WITH GJOEVIK UNIVERSITY COLLEGE(GUC). FONT BY ERICO LEBEDENCO</string>
+
+    <!-- Activity - High Score -->
+    <string name="highScoreMain">High Score</string>
+    <string name="name">Name:\t</string>
+    <string name="highscore">Score:\t</string>
+    <string name="loading">Please wait, loading data</string>
+
+    <!-- Activity - Get User -->
+    <string name="getName">Insert your username</string>
+    <string name="editTextHint">username</string>
+    <string name="buttonText">OK</string>
+    <string name="toastUser">Your username is: </string>
+    <string name="errorBack">You must choose a username first! </string>
+
+    <!-- Activity - End Game -->
+    <string name="highscore_main">Your score was:\t\t</string>
+    <string name="button_quit">QUIT</string>
+    <string name="button_submit">PLAY AGAIN</string>
+    
+	<!--     Activity - Main Game  -->
+	<string name="game_score">Score</string>
+	<string name="game_time">Time Remaining</string>
+
+</resources>

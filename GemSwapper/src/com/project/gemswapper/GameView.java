@@ -82,7 +82,7 @@ public class GameView extends View {
 		patternTypes = new int[7][2];		// [i][0] = The counter for how many of this type solved this round.
 											// [i][1] = The score given for the pattern type. 
 		
-		timeTreshold = 25;
+		timeTreshold = 60;
 
 		startTime = SystemClock.uptimeMillis();
 		
@@ -325,17 +325,16 @@ public class GameView extends View {
 				if(endX > startX)	// drag right.
 				{
 					swapTile(startX, startY, 1, 0);
+					failure = true;
+					
 					if(checkMatch(startY, startX + 1, tiles[startY][startX + 1].getType()))
 					{
 						failure = false;
 					}
-					else if(checkMatch(startY, startX, tiles[startY][startX].getType()))
+					
+				    if(checkMatch(startY, startX, tiles[startY][startX].getType()))
 					{
 						failure = false;
-					}
-					else
-					{
-						failure = true;
 					}
 					
 					if(!failure)
@@ -352,17 +351,16 @@ public class GameView extends View {
 				{
 					
 					swapTile(startX, startY, -1, 0);
+					failure = true;
+					
 					if(checkMatch(startY, startX - 1, tiles[startY][startX - 1].getType()))
 					{
 						failure = false;
 					}
-					else if(checkMatch(startY, startX, tiles[startY][startX].getType()))
+					
+					if(checkMatch(startY, startX, tiles[startY][startX].getType()))
 					{
 						failure = false;
-					}
-					else
-					{
-						failure = true;
 					}
 					
 					if(!failure)
@@ -378,18 +376,16 @@ public class GameView extends View {
 				else if(endY > startY) // drag down.
 				{
 					swapTile(startX, startY, 0, 1);
+					failure = true;
 					
 					if(checkMatch(startY + 1, startX, tiles[startY + 1][startX].getType()))
 					{
 						failure = false;
 					}
-					else if(checkMatch(startY, startX, tiles[startY][startX].getType()))
+					
+					if(checkMatch(startY, startX, tiles[startY][startX].getType()))
 					{
 						failure = false;
-					}
-					else
-					{
-						failure = true;
 					}
 					
 					if(!failure)
@@ -406,17 +402,16 @@ public class GameView extends View {
 				{
 					swapTile(startX, startY, 0, -1);
 					
+					failure = true;
+					
 					if(checkMatch(startY - 1, startX, tiles[startY - 1][startX].getType()))
 					{
 						failure = false;
 					}
-					else if(checkMatch(startY, startX, tiles[startY][startX].getType()))
+					
+					if(checkMatch(startY, startX, tiles[startY][startX].getType()))
 					{
 						failure = false;
-					}
-					else
-					{
-						failure = true;
 					}
 					
 					if(!failure)

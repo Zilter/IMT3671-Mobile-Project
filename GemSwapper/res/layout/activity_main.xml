@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
-            android:text="@string/start_game" />
+            android:text="@string/main_title" />
 
     <LinearLayout
         android:layout_width="wrap_content"

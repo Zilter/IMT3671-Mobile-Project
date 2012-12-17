@@ -31,7 +31,7 @@ public class MainActivity extends Activity implements OnClickListener {
         TextView mainMenuTitle = (TextView) findViewById(R.id.main_menu_title);
         
         mainMenuTitle.setTypeface(typeface);
-        mainMenuTitle.setText(R.string.title_activity_main);
+        mainMenuTitle.setText(R.string.main_title);
         
         ImageButton startGameButton = (ImageButton) findViewById(R.id.start_game_button);
         ImageButton howToPlayButton = (ImageButton) findViewById(R.id.howToPlay_button);

@@ -5,9 +5,10 @@
 <fullyQualifiedTypeName name="android.graphics.Paint.Style"/>
 <fullyQualifiedTypeName name="android.view.WindowManager.LayoutParams"/>
 <fullyQualifiedTypeName name="android.graphics.BitmapFactory"/>
-<fullyQualifiedTypeName name="com.project.gemswapper.R.drawable"/>
 <fullyQualifiedTypeName name="com.project.gemswapper.Tile.TileType"/>
 <fullyQualifiedTypeName name="com.project.gemswapper.R.id"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="com.project.gemswapper.R.string"/>
+<fullyQualifiedTypeName name="com.project.gemswapper.R.drawable"/>
 </qualifiedTypeNameHistroy>
