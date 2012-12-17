@@ -171,10 +171,10 @@ public class EndgameActivity extends Activity {
 
  			oldCurrents[i] = achievementsCursor.getInt(achievementsCursor.getColumnIndexOrThrow("Current"));
  			oldCompleteds[i] = achievementsCursor.getInt(achievementsCursor.getColumnIndexOrThrow("Completed"));
- 			newCompleteds[i] = (oldCompleteds[i] * goal + progressCurrents[i]) / goal;
- 			newCurrents[i] = oldCurrents[i] + progressCurrents[i] % goal;
+ 			newCompleteds[i] = ((oldCompleteds[i] * goal) + oldCurrents[i] + progressCurrents[i]) / goal;
+ 			newCurrents[i] = (oldCurrents[i] + progressCurrents[i]) % goal;
  			
- 			mDbHelper.update(i, newCompleteds[i], newCurrents[i]);
+ 			mDbHelper.update(i+1, newCompleteds[i], newCurrents[i]);
  			pointsTemp += (newCompleteds[i] * pointValue);
  			
  			achievementsCursor.moveToNext();

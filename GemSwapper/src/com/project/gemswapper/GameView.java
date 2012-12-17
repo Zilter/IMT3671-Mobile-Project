@@ -80,7 +80,7 @@ public class GameView extends View {
 		patternTypes = new int[7][2];		// [i][0] = The counter for how many of this type solved this round.
 											// [i][1] = The score given for the pattern type. 
 		
-		timeTreshold = 5;
+		timeTreshold = 25;
 		startTime = SystemClock.uptimeMillis();
 		
 		fillPatterns();

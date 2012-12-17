@@ -21,7 +21,7 @@ public class DatabaseAdapter {
     
     private static final String DATABASE_NAME = "GemswapperDb";
     private static final String DATABASE_TABLE = "Achievements";
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 14;
 
 	private DatabaseHelper mDbHelper;
 	private SQLiteDatabase mDb;
