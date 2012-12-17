@@ -598,15 +598,15 @@ public class GameView extends View {
 	
 	private void clearOut(int pattern, int x, int y)
 	{
-		tiles[y - patterns[pattern][0]][x].setType(-1);	
+		tiles[y - 2 * (patterns[pattern][0])][x].setType(-1);	
 		tiles[y - patterns[pattern][1]][x].setType(-1);	// If the pattern bit is set, set the type to -1.
 		tiles[y + patterns[pattern][7]][x].setType(-1);	// if the bit isn't set, the center will be set to -1 instead,
-		tiles[y + patterns[pattern][8]][x].setType(-1);	// Which works for all patterns. 
+		tiles[y + 2 * (patterns[pattern][8])][x].setType(-1);	// Which works for all patterns. 
 		
 		tiles[y][x + patterns[pattern][5]].setType(-1);
-		tiles[y][x + patterns[pattern][6]].setType(-1);
+		tiles[y][x + 2 * (patterns[pattern][6])].setType(-1);
 		tiles[y][x - patterns[pattern][3]].setType(-1);
-		tiles[y][x - patterns[pattern][2]].setType(-1);
+		tiles[y][x - 2 * (patterns[pattern][2])].setType(-1);
 		
 		tiles[y][x].setType(-1);
 		
