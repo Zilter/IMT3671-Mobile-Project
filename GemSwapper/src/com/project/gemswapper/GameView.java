@@ -67,6 +67,8 @@ public class GameView extends View {
 	
 	boolean dragStarted;
 	
+	private Timer timer;
+	
 	SoundPool sounds;
 	int sFailure;
 	int sSuccess;
@@ -117,7 +119,7 @@ public class GameView extends View {
 		
 		fillGrid();
 		
-		Timer timer = new Timer();
+		timer = new Timer();
 		
 		TimerTask task = new TimerTask(){	// The timer runs every 500 ms and updates the elapsed time. 
 											// In doing so it also invalidates the screen so the time remaining
@@ -641,18 +643,18 @@ public class GameView extends View {
 	
 	private void endGame()
 	{
-		// cancel the timer.. timer.cancel();
+		timer.cancel();
 		
 		Context context = getContext();
 		Intent intent = new Intent(context, EndgameActivity.class);
 		
-		int counters[] = new int[7];
+		int counters[] = new int[8];
 		
 		for (int i = 0; i < patternTypes.length; i++)
 		{
 			counters[i] = patternTypes[i][0];
 		}
-		counters[patternTypes.length+1] = mScore;
+		counters[patternTypes.length] = mScore;
 		
 		String score = String.valueOf(mScore);
 		

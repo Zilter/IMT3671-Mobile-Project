@@ -14,6 +14,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
@@ -21,13 +22,14 @@ import android.widget.TextView;
 
 public class EndgameActivity extends Activity {
 	
-	Intent finishedGame = getIntent();
+	Intent finishedGame;
 	String scoreString;
 	String achievementPoints;
 	Typeface typeface;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	System.out.println("Endgame has started");
     	requestWindowFeature(Window.FEATURE_NO_TITLE); //hide title bar
     	getWindow().setFlags(0xFFFFFFFF, LayoutParams.FLAG_FULLSCREEN | LayoutParams.FLAG_KEEP_SCREEN_ON);
         super.onCreate(savedInstanceState);
@@ -35,7 +37,10 @@ public class EndgameActivity extends Activity {
         
         
         typeface = Typeface.createFromAsset(getAssets(), "IMPACT.TTF");
+        finishedGame = getIntent();
+        Log.i("derp", finishedGame.getStringExtra(GameView.SCORE));
         scoreString = finishedGame.getStringExtra(GameView.SCORE);
+        
         
         
         TextView highscore_main = (TextView) findViewById(R.id.highscore_main);
@@ -46,6 +51,8 @@ public class EndgameActivity extends Activity {
         
         highscore_main.setText(R.string.highscore_main);
         highscore_score.setText(scoreString);
+        
+        System.out.println("Endgame has ended");
     }
 
  // Does the networking in a background thread. 
@@ -101,6 +108,7 @@ public class EndgameActivity extends Activity {
  		} 
      	catch (Exception e) 
      	{
+     		Log.i("derp", "herpderp");
  			e.printStackTrace();
  		}
      	
@@ -141,9 +149,8 @@ public class EndgameActivity extends Activity {
  		mDbHelper = new DatabaseAdapter(this);
  		mDbHelper.open();
  		
- 		Cursor numberOfAchievementsCursor = mDbHelper.fetchAll();
- 		int numberOfAchievements = numberOfAchievementsCursor.getCount();
- 		
+ 		Cursor achievementsCursor = mDbHelper.fetchAll();
+ 		int numberOfAchievements = achievementsCursor.getCount();
  		
  		int oldCurrents[] = new int[numberOfAchievements];
  		int oldCompleteds[] = new int[numberOfAchievements];
@@ -153,22 +160,24 @@ public class EndgameActivity extends Activity {
  		
  		int pointsTemp = 0;
  		
- 	
  		progressCurrents = finishedGame.getIntArrayExtra(GameView.COUNTERS);
  		
- 		for (int i = 0; i < numberOfAchievements; i++)
+ 		achievementsCursor.moveToFirst();
+ 		
+ 		for (int i = 0; i < numberOfAchievements; ++i)
  		{
- 			Cursor achievement = mDbHelper.fetch(i);
- 			int goal = achievement.getInt(achievement.getColumnIndexOrThrow("Goal"));
- 			int pointValue = achievement.getInt(achievement.getColumnIndexOrThrow("PointValue"));
+ 			int goal = achievementsCursor.getInt(achievementsCursor.getColumnIndexOrThrow("Goal"));
+ 			int pointValue = achievementsCursor.getInt(achievementsCursor.getColumnIndexOrThrow("PointValue"));
 
- 			oldCurrents[i] = achievement.getInt(achievement.getColumnIndexOrThrow("Current"));
- 			oldCompleteds[i] = achievement.getInt(achievement.getColumnIndexOrThrow("Completed"));
+ 			oldCurrents[i] = achievementsCursor.getInt(achievementsCursor.getColumnIndexOrThrow("Current"));
+ 			oldCompleteds[i] = achievementsCursor.getInt(achievementsCursor.getColumnIndexOrThrow("Completed"));
  			newCompleteds[i] = (oldCompleteds[i] * goal + progressCurrents[i]) / goal;
  			newCurrents[i] = oldCurrents[i] + progressCurrents[i] % goal;
  			
  			mDbHelper.update(i, newCompleteds[i], newCurrents[i]);
  			pointsTemp += (newCompleteds[i] * pointValue);
+ 			
+ 			achievementsCursor.moveToNext();
  		}
  		achievementPoints = Integer.toString(pointsTemp);
  		
