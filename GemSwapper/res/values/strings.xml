@@ -39,18 +39,6 @@
     <string name="imageInfo">An image describing how to play the game</string>
 
     <!-- Achievements -->
-    <string name="three">Lines of Three</string>
-    <string name="threeDescription">Match three gems</string>
-    <string name="four">Lines of Four</string>
-    <string name="fourDescription">Match four gems</string>
-    <string name="five">Lines of Five</string>
-    <string name="fiveDescription">Match five gems in a straight line</string>
-    <string name="corner">Corner Shapes</string>
-    <string name="cornerDescription">Match gems in a corner shape</string>
-    <string name="tShape">T-Shapes</string>
-    <string name="tShapeDescription">Match gems in a T-shape</string>
-    <string name="score">Score</string>
-    <string name="scoreDescription">Get as many points as you can in one game</string>
     <string name="no_achievements">Something has gone terribly wrong, there are noe achievements here!</string>
     <string name="text2desc">Times Completed:</string>
     <string name="progress">Progress:</string>
