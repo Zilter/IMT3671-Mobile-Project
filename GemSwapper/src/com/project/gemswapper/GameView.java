@@ -31,6 +31,7 @@ public class GameView extends View {
 	private long currentTime; 
 	private long startTime;
 	
+	
 	Paint paint;
 	Resources res;
 	Bitmap grid;
@@ -444,6 +445,18 @@ public class GameView extends View {
 	
 	private void swapTile(int startX, int startY, int x, int y)
 	{
+//		int tempType = tiles[startY][startX].getType();
+//		
+//		tiles[startY][startX].setType(tiles[startY + y][startX + x].getType());
+//		tiles[startY + y][startX + x].setType(tempType);
+		
+		tiles[startY + y][startX + x].mSprite.recycle();
+		tiles[startY][startX].mSprite.recycle();
+		tiles[startY + y][startX + x].mSprite = null;
+		tiles[startY][startX].mSprite = null;
+		
+		System.gc();
+		
 		Tile temp = new Tile(mContext, tiles[startY][startX].getXPos(), tiles[startY][startX].getYPos(), tiles[startY + y][startX + x].getType());
 		tiles[startY + y][startX + x] = new Tile(mContext, tiles[startY + y][startX + x].getXPos(), tiles[startY + y][startX + x].getYPos(), tiles[startY][startX].getType());
 		tiles[startY][startX] = temp;
@@ -452,7 +465,6 @@ public class GameView extends View {
 	@Override
 	protected void onDraw(Canvas canvas)
 	{
-		System.out.println("Drawing...");
 		// Fill screen white
 		paint.setStyle(Paint.Style.FILL);
 		paint.setColor(Color.WHITE);
@@ -662,6 +674,7 @@ public class GameView extends View {
 		
 		Context context = getContext();
 		Intent intent = new Intent(context, EndgameActivity.class);
+ 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		
 		int counters[] = new int[8];
 		

@@ -9,7 +9,7 @@ import android.graphics.Rect;
 
 public class Tile{
 	int mType;
-	Bitmap mSprite;
+	public Bitmap mSprite;
 	Resources res;
 	
 	private int xPos;
@@ -38,7 +38,7 @@ public class Tile{
 	{
 		res = context.getResources();
 		boolean goOn = true;
-
+		
 		if(type == TileType.CIRCLE.ordinal())
 		{
 			mSprite = BitmapFactory.decodeResource(res, R.drawable.circle_tile_01);

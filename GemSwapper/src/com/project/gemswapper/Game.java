@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 
@@ -42,6 +44,7 @@ public class Game extends Activity {
     {
 		super.onPause();
 		mGameView.timer.cancel();
+		System.gc();
     }
 	
 	@Override
@@ -49,5 +52,15 @@ public class Game extends Activity {
     {
 		super.onStop();
 		mGameView.timer.cancel();
+		System.gc();
+    }
+	
+  @Override
+    protected void onDestroy() {
+    super.onDestroy();
+    
+    mGameView = null;
+
+    System.gc();
     }
 }

@@ -126,6 +126,7 @@ public class EndgameActivity extends Activity {
  			new DataSend().execute();
  			
  			Intent startGameIntent = new Intent(this, Game.class);
+ 			startGameIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     		startActivity(startGameIntent);
  		}
  	}
@@ -184,5 +185,26 @@ public class EndgameActivity extends Activity {
  		
  		mDbHelper.close();
  	}
+ 	
+	@Override
+    public void onPause()
+    {
+		super.onPause();
+		System.gc();
+    }
+	
+	@Override
+    public void onStop()
+    {
+		super.onStop();
+		System.gc();
+    }
+	
+  @Override
+    protected void onDestroy() {
+    super.onDestroy();
+
+    System.gc();
+    }
  	
 }
