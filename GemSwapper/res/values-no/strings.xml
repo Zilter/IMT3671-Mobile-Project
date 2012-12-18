@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GemSwapper</string>
+    <string name="menu_settings">Innstillinger</string>
+
+    <!-- activities -->
+    <string name="title_activity_main">Gemswapper</string>
+    <string name="title_activity_highscore">Poenglister</string>
+    <string name="title_activity_credits">Credits</string>
+    <string name="title_activity_game">Spillet</string>
+    <string name="title_activity_achievements">Trofeer</string>
+    <string name="title_activity_how_to">Hjelp</string>
+    <string name="title_activity_database">Database</string>
+    <string name="title_activity_high_score_score">HighScore - Score</string>
+    <string name="title_activity_high_score_achievements">HighScore - Achievements</string>
+    <string name="title_activity_get_user">GetUser</string>
+    <string name="title_activity_endgame">Endgame</string>
+
+    <!-- Main Menu & Menu Buttons -->
+    <string name="main_title">GEMSWAPPER</string>
+    <string name="imageDescription">Dette er et bilde</string>
+
+    <!-- Activity - How To Play -->
+    <string name="howToPlayGame1">Få poeng ved å kombinere tre eller flere krystaller i rett linje</string>
+    <string name="howToPlayGame2">Dra en krystall mot en nabokrystall for å bytte plass på dem</string>
+    <string name="howToPlayGame3">Målet med spillet er å få så mange poeng du klarer før tiden går ut</string>
+    <string name="howToImage1">Tre på rad</string>
+    <string name="howToImage2">Fire på rad</string>
+    <string name="howToImage3">Fem på rad</string>
+    <string name="howToImage4">En hjørne-form</string>
+    <string name="howToImage5">En T-form</string>
+    <string name="imageInfo">Et bilde som beskriver hvordan man spiller</string>
+
+    <!-- Achievements -->
+    <string name="no_achievements">Noe har gått forferdelig galt, det er ingen trofeer her!</string>
+    <string name="text2desc">Antall oppnådd: </string>
+    <string name="progress">Fremgang: </string>
+    <string name="slash">/</string>
+    <string name="reward">Verdi: </string>
+    <string name="points">Poeng</string>
+    <string name="text6desc">Oppnås ved: </string>
+    <string name="imageInfoStar">Trofeikon</string>
+    
+
+    <!-- Activity - Credits -->
+    <string name="creditsMain">CREDITS</string>
+    <string name="creators">THIS GAME WAS CREATED BY CHRISTIAN HOLT, CHRISTIAN STOKKEBEKK AND OEYVIND NORDLI IN 
+        AFFILIATION WITH GJOEVIK UNIVERSITY COLLEGE (GUC). FONT BY ERICO LEBEDENCO</string>
+
+    <!-- Activity - High Score -->
+    <string name="highScoreMain">Poengliste</string>
+    <string name="name">Navn:\t</string>
+    <string name="highscore">Poeng:\t</string>
+    <string name="loading">Vennligst vent, laster data</string>
+
+    <!-- Activity - Get User -->
+    <string name="getName">Skriv brukernavn</string>
+    <string name="editTextHint">brukernavn</string>
+    <string name="buttonText">OK</string>
+    <string name="toastUser">Ditt brukernavn er: </string>
+    <string name="errorBack">Du må velge et brukernavn først! </string>
+
+    <!-- Activity - End Game -->
+    <string name="highscore_main">POENG:\t\t</string>
+    <string name="button_quit">QUIT</string>
+    <string name="button_submit">SPILL IGJEN</string>
+    
+	<!--     Activity - Main Game  -->
+	<string name="game_score">Poeng</string>
+	<string name="game_time">Tid</string>
+
+</resources>

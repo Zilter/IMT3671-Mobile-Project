@@ -4,7 +4,6 @@
     android:layout_height="fill_parent" >
 
     <ImageView
-        android:id="@+id/menu_bg"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:contentDescription="@string/imageDescription"
