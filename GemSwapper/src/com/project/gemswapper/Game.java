@@ -2,10 +2,9 @@ package com.project.gemswapper;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 
@@ -19,6 +18,7 @@ public class Game extends Activity {
     	getWindow().setFlags(0xFFFFFFFF, LayoutParams.FLAG_FULLSCREEN | LayoutParams.FLAG_KEEP_SCREEN_ON);
         super.onCreate(savedInstanceState);
         
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
         mGameView = new GameView(this);
         
         setContentView(mGameView);

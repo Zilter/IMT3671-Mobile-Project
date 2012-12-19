@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -38,6 +39,7 @@ public class HighScoreScore extends ListActivity implements AsyncTaskCompleteLis
 		 getWindow().setFlags(0xFFFFFFFF, LayoutParams.FLAG_FULLSCREEN | LayoutParams.FLAG_KEEP_SCREEN_ON);	
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listplaceholder);
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
         
         mylist = new ArrayList<HashMap <String, String>>();
         

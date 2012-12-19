@@ -2,6 +2,7 @@ package com.project.gemswapper;
 
 import android.app.ListActivity;
 import android.database.Cursor;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
@@ -19,7 +20,8 @@ public class Achievements extends ListActivity  {
 		
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
-        
+
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
         mDbHelper = new DatabaseAdapter(this);
         mDbHelper.open();
         

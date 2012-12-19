@@ -1,0 +1,20 @@
+package com.project.gemswapper;
+
+import android.app.Activity;
+import android.media.AudioManager;
+import android.os.Bundle;
+import android.view.Window;
+
+public class HowToActivity extends Activity 
+{
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) 
+    {
+    	
+    	requestWindowFeature(Window.FEATURE_NO_TITLE);
+        super.onCreate(savedInstanceState);
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        setContentView(R.layout.activity_how_to);
+    }
+}

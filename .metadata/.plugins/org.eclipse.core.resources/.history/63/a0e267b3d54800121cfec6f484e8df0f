@@ -1,0 +1,68 @@
+package com.project.gemswapper;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager.LayoutParams;
+
+public class Game extends Activity {
+	
+	private GameView mGameView;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+    	requestWindowFeature(Window.FEATURE_NO_TITLE);
+    	getWindow().setFlags(0xFFFFFFFF, LayoutParams.FLAG_FULLSCREEN | LayoutParams.FLAG_KEEP_SCREEN_ON);
+        super.onCreate(savedInstanceState);
+        
+        mGameView = new GameView(this);
+        
+        setContentView(mGameView);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_game, menu);
+        return true;
+    }
+    
+	@Override
+    public void onBackPressed()
+    {
+		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		mGameView.timer.cancel();
+		startActivity(intent);
+    }
+	
+	@Override
+    public void onPause()
+    {
+		super.onPause();
+		mGameView.timer.cancel();
+		mGameView = null;
+		System.gc();
+    }
+	
+	@Override
+    public void onStop()
+    {
+		super.onStop();
+		mGameView.timer.cancel();
+		mGameView = null;
+		System.gc();
+    }
+	
+  @Override
+    protected void onDestroy() {
+    super.onDestroy();
+    
+    mGameView = null;
+
+    System.gc();
+    }
+}
